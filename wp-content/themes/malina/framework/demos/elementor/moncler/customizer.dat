@@ -1,0 +1,43 @@
+a:4:{s:8:"template";s:6:"malina";s:4:"mods";a:46:{i:0;b:0;s:18:"nav_menu_locations";a:2:{s:15:"main_navigation";i:2;s:17:"mobile_navigation";i:2;}s:18:"custom_css_post_id";i:84;s:21:"malina_social_twitter";s:1:"#";s:23:"malina_social_instagram";s:1:"#";s:23:"malina_social_pinterest";s:1:"#";s:29:"malina_menu_item_color_active";s:7:"#23d9b2";s:21:"malina_menu_font_size";s:4:"11px";s:23:"malina_menu_font_family";s:7:"Spartan";s:23:"malina_menu_font_weight";s:3:"600";s:22:"malina_menu_item_color";s:7:"#141313";s:33:"malina_posts_headings_font_weight";s:3:"700";s:33:"malina_posts_headings_font_family";s:9:"Cormorant";s:36:"malina_posts_headings_letter_spacing";s:1:"0";s:39:"malina_posts_headings_item_color_active";s:7:"#23d9b2";s:30:"malina_post_headings_transform";s:4:"none";s:26:"malina_meta_info_font_size";s:4:"10px";s:28:"malina_meta_info_font_family";s:7:"Spartan";s:31:"malina_meta_info_letter_spacing";s:1:"2";s:22:"malina_meta_info_color";s:7:"#82888d";s:23:"malina_button_font_size";s:4:"10px";s:25:"malina_button_font_family";s:7:"Spartan";s:25:"malina_button_font_weight";s:3:"700";s:23:"malina_button_transform";s:9:"uppercase";s:28:"malina_button_letter_spacing";s:3:"0.9";s:20:"malina_footer_layout";s:6:"custom";s:20:"malina_custom_footer";s:2:"19";s:25:"malina_single_post_layout";s:4:"wide";s:30:"malina_single_post_title_block";s:5:"under";s:29:"malina_single_post_navigation";s:0:"";s:30:"malina_single_post_author_info";s:0:"";s:30:"malina_button_default_bg_color";s:7:"#23d9b2";s:34:"malina_button_default_border_color";s:7:"#23d9b2";s:30:"malina_button_vertical_padding";s:2:"17";s:21:"malina_body_font_size";s:4:"16px";s:23:"malina_body_line_height";s:4:"32px";s:23:"malina_body_font_family";s:7:"Spartan";s:17:"malina_body_color";s:7:"#1a1b1c";s:29:"malina_grid_posts_line_height";s:4:"28px";s:29:"malina_grid_posts_font_family";s:7:"Spartan";s:19:"malina_accent_color";s:7:"#23d9b2";s:17:"malina_media_logo";s:86:"https://malina.artstudioworks.net/moncler/wp-content/uploads/sites/16/2021/03/logo.png";s:23:"malina_media_logo_width";s:0:"";s:21:"malina_header_variant";s:13:"header-custom";s:20:"malina_custom_header";s:1:"4";s:25:"malina_header_hidden_area";s:0:"";}s:7:"options";a:2:{s:9:"site_icon";s:1:"0";s:23:"nav_menus_created_posts";a:0:{}}s:6:"wp_css";s:1155:".post-meta.footer-meta > div:before {
+    border-top: 2px solid;
+    width: 2px;
+}
+#wpforms-form-99 {
+	display:flex;
+	margin-left:-7px;
+	margin-right:-7px;
+}
+#wpforms-form-99 .wpforms-field-container {
+	display:flex;
+	width:90%;
+}
+#wpforms-form-99 .wpforms-field-container .wpforms-field {
+	width:50%;
+	margin:0 7px;
+}
+#wpforms-form-99 .wpforms-submit-container {
+	margin:0 7px;
+}
+.elementor-widget-malina-contactform div.wpforms-container-full {
+    margin-bottom: 0px;
+}
+.elementor-widget-malina-contactform #wpforms-form-99.wpforms-form input[type=text], .elementor-widget-malina-contactform #wpforms-form-99.wpforms-form input[type=email] {
+	border:0;
+	border-radius:0;
+	font-family:Spartan;
+	padding:28px 33px 27px;
+	height:auto;
+}
+.elementor-widget-malina-contactform #wpforms-form-99.wpforms-form button[type=submit] {
+	padding:26px 37px !important;
+	font-size:21px !important;
+	font-family: Cormorant !important;
+	text-transform:none !important;
+	background-color:#1a1b1c !important;
+}
+#related-posts h2, #comments #reply-title, #comments-title, .write-comment h3 {
+	font-size:11px;
+	font-family:"Spartan";
+	letter-spacing:2px;
+	font-weight:600;
+}";}
