@@ -25,6 +25,7 @@ require plugin_dir_path(__FILE__).'includes/class-vjencaonicaplugin.php';
 
 function run_vjencaonica_plugin(){
     $plugin = new \Vjencaonica\VjencaonicaPlugin();
+    $plugin->run();
 
 }
 

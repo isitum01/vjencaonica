@@ -8,7 +8,7 @@ class VjencaonicaPlugin_Activator
      * Database version
      * Should be updated every time we modify the database
      */
-    const DB_VERSION = '0.0.2';
+    const DB_VERSION = '0.0.1';
 
     /**
      * Database version option name
