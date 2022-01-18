@@ -2,59 +2,93 @@
 
 namespace Vjencaonica;
 
-class VjencaonicaPlugin_Activator
-{
-    /**
-     * Database version
-     * Should be updated every time we modify the database
-     */
-    const DB_VERSION = '0.0.1';
+/**
+ * Fired during plugin activation.
+ *
+ * This class defines all code necessary to run during the plugin's activation.
+ *
+ * @since      1.0.0
+ * @package    VjencaonicaPlugin
+ * @subpackage Vjencaonica/includes
+ */
+class VjencaonicaPlugin_Activator {
+	/**
+	 * Database version
+	 * Should be updated every time we modify the database
+	 */
+	const DB_VERSION = '0.0.2';
 
-    /**
-     * Database version option name
-     */
-    const DB_VERSION_OPTION_NAME = '_vjencaonica_db_version';
+	/**
+	 * Database version option name
+	 */
+	const DB_VERSION_OPTION_NAME = '_vjencaonicaplugin_db_version';
 
-    public static function activate()
-    {
-        if (version_compare(get_bloginfo('version'), '5.0', '<')) {
-            wp_die("You must update WordPress to use this plugin.", 'vjencaonica-plugin');
-        }
 
-        $version = get_option(static::DB_VERSION_OPTION_NAME, false);
+	/**
+	 * Function that is called on plugin activation.
+	 *
+	 * @since    1.0.0
+	 */
+	public static function activate() {
+		// Check if ACF plugin if activated, if not - prevent activating
+		if ( ! is_plugin_active( 'advanced-custom-fields/acf.php' ) ) {
+			wp_die( __( 'Sorry, but this plugin requires the ACF plugin to be installed and active. <br><a href="' . admin_url( 'plugins.php' ) . '">&laquo; Return to Plugins</a>' ) );
+		}
 
-        // If version is same do not create any tables.
-        if ($version == static::DB_VERSION) {
-            return;
-        }
+		$version = get_option( static::DB_VERSION_OPTION_NAME, false );
 
-        // Get queries
-        $queries = static::get_queries();
+		// If version is same do not create any tables.
+		if ( $version == static::DB_VERSION ) {
+			return;
+		}
 
-        // Execute queries
-        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-        dbDelta($queries);
+		// Get queries
+		$queries = static::get_queries();
 
-        // Update the version option in database
-        update_option(static::DB_VERSION_OPTION_NAME, static::DB_VERSION);
-    }
+		// Execute queries
+		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+		dbDelta( $queries );
 
-    public static function get_queries()
-    {
-        global $wpdb;
-        $wp_prefix          = $wpdb->prefix;
-        $charset_collate    = $wpdb->get_charset_collate();
+		// Update the version option in database
+		update_option( static::DB_VERSION_OPTION_NAME, static::DB_VERSION );
+	}
 
-        // Get table names
-        $test_table_name = "{$wp_prefix}test_table_name";
+	/**
+	 * Gets all queries to create on db.
+	 */
+	private static function get_queries() {
+		global $wpdb;
+		$wp_prefix       = $wpdb->prefix;
+		$charset_collate = $wpdb->get_charset_collate();
 
-        return [
-            "CREATE TABLE {$test_table_name}(
-                id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-                first_name VARCHAR(64),
-                last_name VARCHAR(64),
-                PRIMARY KEY id (id)
-            ){$charset_collate};"
-        ];
-    }
+		// Get table names.
+		$music_bands_table = "{$wp_prefix}music_bands";
+
+		return [
+			"CREATE TABLE {$music_bands_table} (
+				id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+				band_name VARCHAR(64),
+				phone VARCHAR(64),
+				email VARCHAR(64),
+				city VARCHAR(64),
+				country VARCHAR(64),
+				availability TEXT,
+				members VARCHAR(64),
+				instruments TEXT,
+				video_link VARCHAR(128),
+				genres VARCHAR(128),
+				female_vocal BOOLEAN,
+				male_vocal BOOLEAN,
+				website VARCHAR(128),
+				instagram VARCHAR(128),
+				facebook VARCHAR(128),
+				tags TEXT,
+				year_of_foundation VARCHAR(64),
+				description TEXT,
+				granted BOOLEAN,
+				date_created VARCHAR(128) NOT NULL,
+			    PRIMARY KEY id (id)
+			) {$charset_collate};"
+		];
+	}
 }
