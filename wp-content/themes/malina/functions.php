@@ -49,6 +49,12 @@ if(!function_exists('malina_scripts_basic')){
 			wp_localize_script( 'malina-ajaxsearch', 'malinaAjaxSearch', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 		}
 		wp_enqueue_script('malina-functions', get_template_directory_uri() . '/js/malina-functions.js', array('jquery'), '1.0', TRUE);
+
+		// CUSTOM VJENCAONICA SCRIPTS
+		$theme_uri  = get_theme_file_uri();
+    	$version    = time();
+		wp_register_script('vjencaonica_script', $theme_uri . '/assets/dist/bundle.min.js', [], $version, true);
+		wp_enqueue_script('vjencaonica_script');
 	}
 	add_action( 'wp_enqueue_scripts', 'malina_scripts_basic', 11 );
 }
