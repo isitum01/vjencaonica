@@ -1,0 +1,19 @@
+//
+// File for definition of all core common contents such as
+// default project font (for html element), some body styles
+// etc.
+//
+@import "variables";
+
+html {
+  font-size: 10px !important;
+  font-weight: normal;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+body {
+  font-size: 1.6rem;
+}

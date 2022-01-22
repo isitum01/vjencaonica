@@ -1,7 +1,7 @@
 function MusicBandRegistration($) {
     return {
         init() {
-            // console.log("music-band-script init");
+            // console.log("music-band-script inist");
         }
     }
 }

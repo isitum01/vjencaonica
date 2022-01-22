@@ -1,0 +1,37 @@
+// File for defining common button styles
+
+.c-button {
+  display: inline-block;
+  position: relative;
+  background-color: transparent;
+  text-transform: uppercase;
+  color: $color-button-text;
+  border: 1px solid $color-black;
+  outline: none;
+  padding: 10px 20px;
+  cursor: pointer;
+
+  // Bottom arrow if one
+  & > svg {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    overflow: hidden;
+
+    path {
+      transform-origin: right center;
+      transition: transform 150ms ease-out;
+    }
+  }
+
+  // Hover and focus styles
+  &:hover,
+  &:focus {
+    background-color: grey;
+  }
+
+  // Active styles
+  &:active {
+    opacity: 0.7;
+  }
+}

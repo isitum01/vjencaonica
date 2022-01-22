@@ -40,11 +40,14 @@ const themeRoutes = {
     },
 
     // Scripts to be initialized on the Music band registration page
-    musicBandRegistration: {
-        init: () => {
-            MusicBandRegistration.init();
-        },
-    }
+    musicBandRegistration: MusicBandRegistration
+        
+    // Scripts to be initialized on the Music band registration page (template for more scripts)
+    // musicBandRegistration: {
+    //     init: () => {
+    //         MusicBandRegistration.init();
+    //     },
+    // }
 };
 
 // Init router

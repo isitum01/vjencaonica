@@ -2,8 +2,11 @@
 
 {% block content %}
     <main>
-        {{ vm.content | raw}}
+        <div class="music-band-registration__container">
+            <h2  class="music-band-registration__container__title">MUSIC BAND REGISTRATION</h2>
 
-        <h2>mb page init</h2>
+            {% include "pages/music-band-registration-page/form.twig" %}
+        </div>
+        
     </main>
 {% endblock %}

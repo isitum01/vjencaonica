@@ -1,6 +1,6 @@
 <?php 
 /*
-Template Name: MB Registration
+Template Name: Music Band Registration
 */
 
 use Vjencaonica\MusicBandRegistrationPageViewModel;

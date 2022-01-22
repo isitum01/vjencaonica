@@ -1,19 +1,33 @@
-<div class="c-input-container">
-    {% if label is not empty %}
-        <label class="c-input-container__label {{ labelClass|default('') }}" for="{{ name }}">
-            {{ label }}
-        </label>
-    {% endif %}
-    <input value="{{ value|default('') }}"
-           class="c-input-container__input {{ inputClass|default('') }}"
-           id="{{ name }}"
-           name="{{ name }}"
-           type="{{ type|default('text') }}"
-            {% if disabled %}
-                disabled
-            {% endif %}
-    />
-    <span class="c-input-container__error">
+<div class="c-input-container {{ containerClass|default('') }}">
+	{% if label is not empty %}
+		<label class="c-input-container__label {{ labelClass|default('') }}" for="{{ name }}">{{ label }}</label>
+	{% endif %}
+	{% if type == 'textarea' %}
+		<textarea
+			class="c-input-container__input {{ inputClass|default('') }}"
+			id="{{ name }}"
+			name="{{ name }}"
+			type="{{ type|default('text') }}"
+			placeholder="{{ placeholder|default('') }}"
+			maxLength="{{ maxLength|default(1000) }}"
+			{% if disabled %}
+				disabled
+			{% endif %}
+		>{{ value|default('') }}</textarea>
+	{% else %}
+		<input
+			value="{{ value|default('') }}"
+			class="c-input-container__input {{ inputClass|default('') }}"
+			id="{{ name }}"
+			name="{{ name }}"
+			type="{{ type|default('text') }}"
+			placeholder="{{ placeholder|default('') }}"
+			{% if disabled %}
+				disabled
+			{% endif %}
+		/>
+	{% endif %}
+	<span class="c-input-container__error">
 		{{ error|default('Ovo polje je obavezno') }}
 	</span>
 </div>

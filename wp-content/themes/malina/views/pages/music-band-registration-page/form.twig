@@ -1,0 +1,117 @@
+<form class="music-band-form">
+    {# Basic band info #}
+    <div class="music-band-form__about-band">
+        {# Band name #}
+        {% include "components/input.twig" with {
+            label: 'Naziv benda',
+            name: 'band-name'
+        } %}
+        {# City #}
+        {% include "components/input.twig" with {
+            label: 'Grad',
+            name: 'city'
+        } %}
+        {# Country #}
+        {% include "components/input.twig" with {
+            label: 'Država',
+            name: 'country'
+        } %}
+        {# Places where available #}
+        {% include "components/input.twig" with {
+            label: 'Dostupnost',
+            name: 'availability'
+        } %}
+    </div>
+
+    {# Band contacts #}
+    <div class="music-band-form__contacts">
+        {# Phone number #}
+        {% include "components/input.twig" with {
+            label: 'Broj mobitela',
+            name: 'phone'
+        } %}
+        {# E-mail #}
+        {% include "components/input.twig" with {
+            label: 'E-mail',
+            name: 'email',
+            type: 'email'
+        } %}
+        {# Website #}
+        {% include "components/input.twig" with {
+            label: 'Web stranica',
+            name: 'website'
+        } %}
+        {# Instagram #}
+        {% include "components/input.twig" with {
+            label: 'Instagram',
+            name: 'instagram'
+        } %}
+        {# Facebook #}
+        {% include "components/input.twig" with {
+            label: 'Facebook',
+            name: 'facebook'
+        } %}
+        {# Video link (E.g. YouTube) #}
+        {% include "components/input.twig" with {
+            label: 'Video',
+            name: 'video-link'
+        } %}
+    </div>
+
+    {# More band information #}
+    <div class="music-band-form__more">
+        {# Number of members #}
+        {% include "components/input.twig" with {
+            label: 'Broj članova',
+            name: 'members'
+        } %}
+        {# List of instruments #}
+        {% include "components/input.twig" with {
+            label: 'Instrumenti',
+            name: 'instruments'
+        } %}
+        {# Female vocal #}
+        {% include "components/input.twig" with {
+            label: 'Ženski vokal',
+            name: 'female-vocal',
+            type: 'checkbox',
+            containerClass: 'input-flex'
+        } %}
+        {# Male vocal #}
+        {% include "components/input.twig" with {
+            label: 'Muški vokal',
+            name: 'male-vocal',
+            type: 'checkbox',
+            containerClass: 'input-flex'
+        } %}
+        {# Genres #}
+        {% include "components/input.twig" with {
+            label: 'Žanrovi',
+            name: 'genres'
+        } %}
+        {# Tags #}
+        {% include "components/input.twig" with {
+            label: 'Tagovi',
+            name: 'tags'
+        } %}
+        {# Year of foundation #}
+        {% include "components/input.twig" with {
+            label: 'Godina osnivanja',
+            name: 'year-of-foundation'
+        } %}
+        {# Band description #}
+        {% include "components/input.twig" with {
+            label: 'Kratki opis',
+            name: 'description',
+            type: 'textarea'
+        } %}
+    </div>
+
+    {# Submit button #}
+    {% include "components/button.twig" with {
+        text: 'Pošalji prijavu',
+        link: '/',
+        disabledClass: 'disabled'
+    } %}
+
+</form>	

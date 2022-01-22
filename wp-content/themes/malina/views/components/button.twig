@@ -1,0 +1,14 @@
+{# Parameters:
+	text: button text
+	disabled: true/false (default: false)
+	className: specific class for custom styling
+#}
+
+<a class="c-button {{ className|default("") }} {{ disabledClass|default("") }}"
+        type="{{ type|default('button') }}"
+        href="{{ link }}">
+    {{ text }}
+    {% if imgPath is not empty %}
+        {# <img src="{{ image(imgPath) }}" alt="{{ imgAlt }}"/> #}
+    {% endif %}
+</a>
