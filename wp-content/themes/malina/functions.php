@@ -50,11 +50,6 @@ if(!function_exists('malina_scripts_basic')){
 		}
 		wp_enqueue_script('malina-functions', get_template_directory_uri() . '/js/malina-functions.js', array('jquery'), '1.0', TRUE);
 
-		// CUSTOM VJENCAONICA SCRIPTS
-		$theme_uri  = get_theme_file_uri();
-    	$version    = time();
-		wp_register_script('vjencaonica_script', $theme_uri . '/assets/dist/bundle.min.js', [], $version, true);
-		wp_enqueue_script('vjencaonica_script');
 	}
 	add_action( 'wp_enqueue_scripts', 'malina_scripts_basic', 11 );
 }
@@ -2144,4 +2139,33 @@ function malina_schemaorg_print_scripts() {
 }
 add_action('wp_footer', 'malina_schemaorg_print_scripts');
 }
+?>
+
+<?php 
+	//***** CUSTOM VJENCAONICA FUNCTIONS *****//
+
+	use Vjencaonica\Vjencaonica_Twig;
+	use Timber\Twig;
+
+	require_once(__DIR__.'/vendor/autoload.php');
+	require_once 'classes/class-vjencaonica-twig.php';
+	require_once 'classes/class-vjencaonica-view-models-loader.php';
+
+	// Setup
+	define('VJENCAONICA_DEV_MODE', true);
+
+	$bde_twig = new Vjencaonica_Twig();
+	$timber = new Timber\Timber();
+	$vm_loader = new Vjencaonica\Vjencaonica_View_Models_Loader();
+	$vm_loader->load_theme_view_models();
+
+
+	$theme_uri  = get_theme_file_uri();
+    // $version    = VJENCAONICA_DEV_MODE ? time() : false;
+    $version    = time();
+
+	wp_register_script('vjencaonica_script', $theme_uri . '/assets/dist/bundle.min.js', [], $version, true);
+	wp_enqueue_script('vjencaonica_script');
+
+
 ?>

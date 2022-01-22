@@ -20,14 +20,14 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - '7.1.3'
                     - '7.2.5'
                     - '7.3'
                     - '7.4'
                     - '8.0'
-                    - '8.1'
                 composer-options: ['']
                 experimental: [false]
+                include:
+                  - { php-version: '8.1', experimental: true, composer-options: '--ignore-platform-req=php' }
 
         steps:
             - name: "Checkout code"
@@ -83,7 +83,6 @@ jobs:
                     - '7.3'
                     - '7.4'
                     - '8.0'
-                    - '8.1'
                 extension:
                     - 'extra/cssinliner-extra'
                     - 'extra/html-extra'
@@ -92,8 +91,6 @@ jobs:
                     - 'extra/markdown-extra'
                     - 'extra/string-extra'
                     - 'extra/twig-extra-bundle'
-                composer-options: ['']
-                experimental: [false]
 
         steps:
             - name: "Checkout code"

@@ -1,0 +1,8 @@
+<body data-route="{{ jsRoute|default('') }}" class="{{ bodyClass|default('') }} ">       
+    {{ function('wp_head') }}
+    
+    {% block content %} 
+    
+    {% endblock %}
+    
+    {{ function('wp_footer') }}

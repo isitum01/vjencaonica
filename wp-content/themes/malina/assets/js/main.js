@@ -15,7 +15,7 @@ import '../styles/main.scss';
 
 // // Import js for pages
 // import HomePage from './pages/home-page/home-page';
-import MusicBand from './pages/music-band-registration/music-band-registration';
+import MusicBandRegistration from './pages/music-band-registration/music-band-registration';
 // import ContactPage from './pages/contact-page/contact-page';
 // import DashboardPage from './pages/dashboard/dashboard';
 
@@ -30,7 +30,7 @@ const themeRoutes = {
     common: {
         init: () => {
             // Initialize page loading
-            Navbar.init();
+            // Navbar.init();
             // Input.init();
             // LanguageSelection.init();
         },
@@ -39,29 +39,12 @@ const themeRoutes = {
         },
     },
 
-    // Scripts to be initialized on the front page
-    homePage: {
+    // Scripts to be initialized on the Music band registration page
+    musicBandRegistration: {
         init: () => {
-            // HomePage.init();
+            MusicBandRegistration.init();
         },
-    },
-    // homePage: HomePage,
-
-    // Scripts to be initialized on the contact page
-    contactPage: {
-        init: () => {
-            // ContactPage.init();
-        },
-    },
-
-    // Scripts to be initialized on the dashboard page
-    dashboardPage: {
-        init: () => {
-            // DashboardPage.init();
-        },
-    },
-
-    // singleRecipe: SingleRecipe
+    }
 };
 
 // Init router
@@ -70,6 +53,5 @@ router.setRoutes(themeRoutes);
 // Apply router
 jQuery(document).ready(()=>{
     // Load all router events
-    // router.loadEvents();
-    console.log("MAIN LOADED");
+    router.loadEvents();
 });

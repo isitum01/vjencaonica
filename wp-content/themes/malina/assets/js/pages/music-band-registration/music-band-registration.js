@@ -1,9 +1,9 @@
-function MusicBand($) {
+function MusicBandRegistration($) {
     return {
         init() {
-            console.log("FRONT PAGE");
+            // console.log("music-band-script init");
         }
     }
 }
 
-export default MusicBand($)
+export default MusicBandRegistration($)
