@@ -1,0 +1,19 @@
+<div class="c-input-container">
+    {% if label is not empty %}
+        <label class="c-input-container__label {{ labelClass|default('') }}" for="{{ name }}">
+            {{ label }}
+        </label>
+    {% endif %}
+    <input value="{{ value|default('') }}"
+           class="c-input-container__input {{ inputClass|default('') }}"
+           id="{{ name }}"
+           name="{{ name }}"
+           type="{{ type|default('text') }}"
+            {% if disabled %}
+                disabled
+            {% endif %}
+    />
+    <span class="c-input-container__error">
+		{{ error|default('Ovo polje je obavezno') }}
+	</span>
+</div>
