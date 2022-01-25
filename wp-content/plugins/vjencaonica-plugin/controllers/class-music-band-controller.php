@@ -2,7 +2,14 @@
 
 namespace Vjencaonica;
 
-class Music_Band_Controller extends VjencaonicaPlugin_Controller {
+use WP_REST_Request;
+use WP_REST_Server;
+
+/**
+ * Class Music_Band_Controller
+ */
+class Music_Band_Controller extends VjencaonicaPlugin_Controller
+{
 	/**
 	 * @var Music_Band_Service
 	 */
@@ -15,8 +22,9 @@ class Music_Band_Controller extends VjencaonicaPlugin_Controller {
 	 *
 	 * @throws \Exception
 	 */
-	public function __construct() {
-		parent::__construct( 'music-band-registration' );
+	public function __construct()
+	{
+		parent::__construct('vj_music_band_registration');
 		$this->music_band_service = new Music_Band_Service();
 	}
 
@@ -27,36 +35,36 @@ class Music_Band_Controller extends VjencaonicaPlugin_Controller {
 	 *
 	 * @since   1.0.0
 	 */
-	public function register_routes() {
+	public function register_routes()
+	{
 		register_rest_route(
 			$this->get_namespace(),
 			"/" . $this->route,
 			[
-				'methods'  => 'POST',
-				'callback' => [ $this, 'create_music_band_registration' ],
-				'permission_callback' => '__return_true'
+				'methods'  => WP_REST_Server::CREATABLE,
+				'callback' => [$this, 'create_music_band_registration']
 			]
 		);
-
 	}
 
-	public function create_music_band_registration( \WP_REST_Request $request ) {
-		$r      = $request->get_params();
-		
-		$result = $this->music_band_service->validate_create( $r );
-		if ( ! $result->is_valid() ) {
-			return $this->bad_request( $result->get_message() );
-		}
-
+	/**
+	 * Creates Music band registration.
+	 *
+	 * @param \WP_REST_Request $request
+	 *
+	 * @return \WP_REST_Response
+	 */
+	public function create_music_band_registration(WP_REST_Request $request)
+	{
 		try {
-			$application = $this->music_band_service->create( $r );
+			// Create par ili ne par registration from params
+			$application = $this->music_band_service->create($request->get_params());
 
-			return $this->ok( [
-				'application' => $application,
-				'permalink'   => get_permalink( $application->wp_post )
-			] );
-		} catch ( \Exception $e ) {
-			return $this->exception_response( $e );
+			return $this->ok($application);
+		} catch (Validation_Exception $e) {
+			return $this->bad_request($e->getMessage());
+		} catch (\Exception $e) {
+			return $this->exception_response($e);
 		}
 	}
 }
