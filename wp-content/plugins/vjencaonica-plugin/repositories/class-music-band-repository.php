@@ -21,7 +21,7 @@ class Music_Band_Repository extends ARepository
 	 */
 	public function __construct()
 	{
-		parent::__construct('vj_music_band_registration');
+		parent::__construct('vj_music_bands');
 	}
 
 	/**
