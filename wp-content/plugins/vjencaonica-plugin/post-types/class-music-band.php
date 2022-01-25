@@ -3,15 +3,16 @@
 namespace Vjencaonica;
 
 /**
- * Class Dual_Campaign_Registration
+ * Class Music_Band
  * @package Vjencaonica
  */
-
-class Music_Band {
+class Music_Band
+{
 	const POST_TYPE = 'music-band';
+	const SLUG = 'music-band-prijave';
 
 	public $id;
-	public $wp_post;
+	// public $wp_post;
 	public $band_name;
 	public $phone;
 	public $email;
@@ -34,99 +35,97 @@ class Music_Band {
 	public $date_created;
 
 	/**
-	 * NN_Blagdanska_Registration constructor.
+	 * Music_Band constructor.
 	 *
 	 * @param array $row
-	 * @param null|\WP_Post $wp_post
+	 * @param null $wp_post
 	 */
-	public function __construct( $row = [], $wp_post = null ) {
-		$this->wp_post = $wp_post;
-		$this->id      = ! empty( $wp_post ) ? $this->wp_post->ID : 0;
+	public function __construct($row = [], $post = null)
+	{
+		// Init current date as date created
+		$this->date_created = new \DateTime();
 
-		if ( ! $row ) {
+		// We construct empty object
+		if (empty($row)) {
 			return;
 		}
 
+		$this->id 					= intval($row['id']);
+		// public $wp_post;
 		$this->band_name 			= $row['band_name'];
-		$this->phone      			= $row['phone'];
-		$this->email      			= $row['email'];
-		$this->city  				= $row['city'];  //city
-		$this->country    			= $row['country'];
-		$this->available_locations  = $row['available_locations'];
-		$this->members    			= $row['members'];
-		$this->instruments      	= $row['instruments'];
-		$this->video_link   		= $row['video_link'];
-		$this->genres				= $row['genres'];
+		$this->phone 				= $row['phone'];
+		$this->email 				= $row['email'];
+		$this->city 				= $row['city'];
+		$this->country 				= $row['country'];
+		$this->availability 		= $row['availability'];
+		$this->members 				= $row['members'];
+		$this->instruments 			= $row['instruments'];
+		$this->video_link			= $row['video_link'];
+		$this->genres 				= $row['genres'];
 		$this->female_vocal			= $row['female_vocal'];
-		$this->male_vocal			= $row['male_vocal'];
-		$this->website				= $row['website'];
-		$this->instagram			= $row['instagram'];
-		$this->facebook				= $row['facebook'];
-		$this->tags					= $row['tags'];
+		$this->male_vocal 			= $row['male_vocal'];
+		$this->website 				= $row['website'];
+		$this->instagram 			= $row['instagram'];
+		$this->facebook 			= $row['facebook'];
+		$this->tags 				= $row['tags'];
 		$this->year_of_foundation	= $row['year_of_foundation'];
-		$this->description			= $row['description'];
-		$this->granted				= $row['granted'];
-		$this->date_created    		= \DateTime::createFromFormat( DATE_ATOM, $row['date_created'] );
-
+		$this->description 			= $row['description'];
+		$this->granted 				= $row['granted'];
+		$this->date_created			= \DateTime::createFromFormat(DATE_ATOM, $row['date_created']);
 	}
 
 	/**
-	 * Load class
+	 * Loads the class.
 	 *
-	 * @param VjencaonicaPlugin_Loader $loader
+	 * @param $loader
 	 */
-	public static function load_class( $loader ) {
-
-		// Inits new post type
-		$loader->add_action( 'init', static::class, 'init_post_type' );
-
+	public static function load_class($loader)
+	{
+		// Initializes new post type
+		$loader->add_action('init', static::class, 'init_post_type');
 	}
 
 	/**
-	 * Register meat the expert custom post type
+	 * Registers Music Band custom post type.
 	 */
-	public static function init_post_type() {
+	public static function init_post_type()
+	{
 		$labels = [
-			'name'               => _x( 'Bendovi', 'post type general name', PLUGIN_TEXTDOMAIN ),
-			'singular_name'      => _x( 'Bend', 'post type singular name', PLUGIN_TEXTDOMAIN ),
-			'menu_name'          => _x( 'Bendovi', 'admin menu', PLUGIN_TEXTDOMAIN ),
-			'name_admin_bar'     => _x( 'Bendovi', 'add new on admin bar', PLUGIN_TEXTDOMAIN ),
-			'add_new'            => _x( 'Dodaj novi', self::POST_TYPE, PLUGIN_TEXTDOMAIN ),
-			'add_new_item'       => __( 'Dodaj novi', PLUGIN_TEXTDOMAIN ),
-			'new_item'           => __( 'Nova bend', PLUGIN_TEXTDOMAIN ),
-			'edit_item'          => __( 'Uredi bend', PLUGIN_TEXTDOMAIN ),
-			'view_item'          => __( 'Pregledaj bend', PLUGIN_TEXTDOMAIN ),
-			'all_items'          => __( 'Svi bendovi', PLUGIN_TEXTDOMAIN ),
-			'search_items'       => __( 'Pretraži bend', PLUGIN_TEXTDOMAIN ),
-			'parent_item_colon'  => __( 'Parent objava:', PLUGIN_TEXTDOMAIN ),
-			'not_found'          => __( 'Nije pronađeno', PLUGIN_TEXTDOMAIN ),
-			'not_found_in_trash' => __( 'Nije pronađeno u smeću', PLUGIN_TEXTDOMAIN )
+			'name'               => _x('Music bands', 'post type general name', PLUGIN_TEXTDOMAIN),
+			'singular_name'      => _x('Music Band', 'post type singular name', PLUGIN_TEXTDOMAIN),
+			'menu_name'          => _x('Music bands', 'admin menu', PLUGIN_TEXTDOMAIN),
+			'name_admin_bar'     => _x('Music Band', 'add new on admin bar', PLUGIN_TEXTDOMAIN),
+			'add_new'            => _x('Add New', 'book', PLUGIN_TEXTDOMAIN),
+			'add_new_item'       => __('Add New Music Band', PLUGIN_TEXTDOMAIN),
+			'new_item'           => __('New Music Band', PLUGIN_TEXTDOMAIN),
+			'edit_item'          => __('Edit Music Band', PLUGIN_TEXTDOMAIN),
+			'view_item'          => __('View Music Band', PLUGIN_TEXTDOMAIN),
+			'all_items'          => __('All Music bands', PLUGIN_TEXTDOMAIN),
+			'search_items'       => __('Search Music bands', PLUGIN_TEXTDOMAIN),
+			'parent_item_colon'  => __('Parent Music bands:', PLUGIN_TEXTDOMAIN),
+			'not_found'          => __('No registrations found.', PLUGIN_TEXTDOMAIN),
+			'not_found_in_trash' => __('No registrations found in Trash.', PLUGIN_TEXTDOMAIN)
 		];
 
-		// Args
 		$args = [
 			'labels'             => $labels,
-			'public'             => true,
-			'publicly_queryable' => true,
-			'show_ui'            => true,
-			'show_in_menu'       => true,
-			'show_in_nav_menus'  => true,
+			'description'        => __('Description.', PLUGIN_TEXTDOMAIN),
+			'public'             => false,
+			'publicly_queryable' => false,
+			'show_ui'            => false,
+			'show_in_menu'       => false,
 			'query_var'          => true,
-			'rewrite'            => [ 'slug' => __( 'music-band', PLUGIN_TEXTDOMAIN ) ],
+			'rewrite'            => ['slug' => self::SLUG],
 			'capability_type'    => 'post',
-			'has_archive'        => true,
+			'has_archive'        => false,
 			'hierarchical'       => false,
 			'menu_position'      => null,
-			'supports'           => [
-				'title',
-				'excerpt',
-				'thumbnail'
-			],
-			'show_in_rest'       => false,
-			'menu_icon'          => 'dashicons-groups'
+			'supports'           => ['title', 'editor'],
+			'menu_icon'          => 'dashicons-id-alt',
+			'show_in_rest'       => false
 		];
 
 		// Register post type
-		register_post_type( static::POST_TYPE, $args );
+		register_post_type(static::POST_TYPE, $args);
 	}
 }
