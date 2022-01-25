@@ -2,8 +2,8 @@
 
 namespace Vjencaonica;
 
-use WpHelpers\Classes\Request_Validation_Result;
-use WpHelpers\Services\Validation_Service;
+use Ew\WpHelpers\Classes\Request_Validation_Result;
+use Ew\WpHelpers\Services\Validation_Service;
 
 /**
  * Class Music_Band_Service
@@ -56,11 +56,21 @@ class Music_Band_Service extends Validation_Service {
 			$result->merge( $this->not_empty( $r, $required_field, 'music_band_create' ) );
 		}
 
+		// Skip additional validation if any field is empty
+		if ( ! $result->is_valid() ) {
+			return $result;
+		}
+
+		// Validate email
+		if ( ! filter_var( $r['email'], FILTER_VALIDATE_EMAIL ) ) {
+			$result->add_error_message( '[email] is not valid' );
+		}
+
 		return $result;
 	}
 
 	/**
-	 * Creates new Music Band.
+	 * Creates new Music Band application.
 	 *
 	 * @param array $r
 	 *
@@ -68,49 +78,42 @@ class Music_Band_Service extends Validation_Service {
 	 * @throws \Exception
 	 */
 	public function create( array $r ) {
-		$slug              = Random_Values_Helper::get_random_string( 8 );
-		$last_name_initial = mb_substr( mb_strtoupper( $r['lastName'] ), 0, 1 );
-		$full_name         = "{$r['firstName']} $last_name_initial.";
+		// Validate request
+		$validation_result = $this->validate_create( $r );
 
-		// Create wp post
-		$post_id = wp_insert_post( [
-			'post_title'   => $full_name,
-			'post_status'  => 'publish',
-			'post_type'    => Music_Band::POST_TYPE,
-			'post_name'    => $slug,
-			'post_excerpt' => $r['description']
-		] );
-
-		if ( empty( $post_id ) ) {
-			throw new \Exception( 'Post could not be created' );
+		// If the result is not valid throw request validation exception
+		if ( ! $validation_result->is_valid() ) {
+			throw new Validation_Exception( $validation_result->get_message() );
 		}
-		$post = get_post( $post_id );
 
-		// Create Music_Band registration for post
-		$music_band = new Music_Band([], $post);
-		$music_band->band_name 		        = $r['bandName'];
-		$music_band->phone		            = $r['phone'];
-		$music_band->email    		        = $r['email'];
-		$music_band->city   	            = $r['city'];
-		$music_band->country       		    = $r['country'];
-		$music_band->available_locations    = $r['availableLocations'];
-		$music_band->members    		    = $r['members'];
-		$music_band->instruments      	    = $r['instruments'];
-		$music_band->email      		    = $r['email'];
-		$music_band->genres	                = $r['genres'];
-		$music_band->femaleVocal	        = $r['femaleVocal'];
-		$music_band->maleVocal	            = $r['maleVocal'];
-		$music_band->website	            = $r['website'];
-		$music_band->instagram	            = $r['instagram'];
-		$music_band->facebook	            = $r['facebook'];
-		$music_band->tags	                = $r['tags'];
-		$music_band->year_of_foundation     = $r['yearOfFoundation'];
-		$music_band->description	        = $r['description'];
-		$music_band->granted	        	= $r['granted'];
-		$music_band->date_created    	    = new \DateTime();
+		try {
+			// Save prize game registration to the db
+			$application                        = new Ketchup_Gang_Registration();
+			$application->band_name				= sanitize_text_field( $r['bandName'] );
+			$application->phone					= sanitize_text_field( $r['phone'] );
+			$application->email					= sanitize_text_field( $r['email'] );
+			$application->city					= sanitize_text_field( $r['city'] );
+			$application->country				= sanitize_text_field( $r['country'] );
+			$application->available_locations	= sanitize_text_field( $r['availableLocations'] );
+			$application->members				= sanitize_text_field( $r['members'] );
+			$application->instruments			= sanitize_text_field( $r['instruments'] );
+			$application->video_link			= sanitize_text_field( $r['videoLink'] );
+			$application->genres				= sanitize_text_field( $r['genres'] );
+			$application->female_vocal			= sanitize_text_field( $r['femaleVocal'] );
+			$application->male_vocal			= sanitize_text_field( $r['maleVocal'] );
+			$application->website				= sanitize_text_field( $r['website'] );
+			$application->instagram				= sanitize_text_field( $r['instagram'] );
+			$application->facebook				= sanitize_text_field( $r['facebook'] );
+			$application->tags					= sanitize_text_field( $r['tags'] );
+			$application->yearOfFoundation		= sanitize_text_field( $r['yearOfFoundation'] );
+			$application->description			= sanitize_text_field( $r['description'] );
+			$application->date_created			= new \DateTime();
 
-		$music_band = $this->music_band_repository->save( $music_band );
 
-		return $music_band;
+			// Return saved user registration
+			return $this->applications_repository->save( $application );
+		} catch ( \Exception $e ) {
+			throw $e;
+		}
 	}
 }
