@@ -1,0 +1,56 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "e4979cbe082fb5ebe21168cbc4e51827",
+    "packages": [
+        {
+            "name": "enterwell/wp-helpers",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Enterwell/wp-helpers.git",
+                "reference": "814b3d9de965022a88e21cb8e1360ae5b9d52a92"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Enterwell/wp-helpers/zipball/814b3d9de965022a88e21cb8e1360ae5b9d52a92",
+                "reference": "814b3d9de965022a88e21cb8e1360ae5b9d52a92",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ew\\WpHelpers\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matej Bošnjak",
+                    "email": "matej.bosnjak.b@gmail.com"
+                }
+            ],
+            "description": "Helper classes for WordPress custom development.",
+            "support": {
+                "issues": "https://github.com/Enterwell/wp-helpers/issues",
+                "source": "https://github.com/Enterwell/wp-helpers/tree/master"
+            },
+            "time": "2018-09-04T06:19:09+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.1.0"
+}
