@@ -1,6 +1,6 @@
 <?php
 
-namespace WpHelpers\Repositories;
+namespace Ew\WpHelpers\Repositories;
 /**
  * Abstract repository class.
  *
@@ -9,6 +9,12 @@ namespace WpHelpers\Repositories;
  * custom db tables (that could be post types with meta data that we decided
  * to store in custom tables rather dan postmeta).
  *
+ *
+ * @since       1.0.0
+ *
+ * @package     Ew
+ * @subpackage  Ew/repositories
+ * @author      Matej Bosnjak <matej.bosnjak@enterwell.net>
  */
 abstract class ARepository {
 	/**

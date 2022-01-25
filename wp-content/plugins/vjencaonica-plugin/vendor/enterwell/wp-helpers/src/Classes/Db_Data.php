@@ -1,8 +1,20 @@
 <?php
-namespace WpHelpers\Classes;
-/*
+/**
+ * Created by PhpStorm.
+ * User: Matej
+ * Date: 21.4.2017.
+ * Time: 11:33
+ */
+namespace Ew\WpHelpers\Classes;
+/**
  * Helper class for repository Create and Update actions.
  *
+ *
+ * @since       1.0.0
+ *
+ * @package     Ew
+ * @subpackage  Ew/repositories
+ * @author      Matej Bosnjak <matej.bosnjak@enterwell.net>
  */
 class Db_Data{
 
@@ -43,7 +55,7 @@ class Db_Data{
         $this->values[$value_name] = $value;
         $this->formats[] = $format;
     }
-    /*
+    /**
      * Adds data to this db data if value is not empty.
      *
      * @since   1.0.0

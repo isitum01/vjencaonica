@@ -63,6 +63,7 @@ class VjencaonicaPlugin_Activator {
 
 		// Get table names.
 		$music_bands_table = "{$wp_prefix}music_bands";
+		$ketchup_gang_reagistration_table       = "{$wp_prefix}ew_ketchup_gang_registration";
 
 		return [
 			"CREATE TABLE {$music_bands_table} (
@@ -72,23 +73,33 @@ class VjencaonicaPlugin_Activator {
 				email VARCHAR(64),
 				city VARCHAR(64),
 				country VARCHAR(64),
-				availability TEXT,
+				availability VARCHAR(64),
 				members VARCHAR(64),
-				instruments TEXT,
+				instruments VARCHAR(64),
 				video_link VARCHAR(128),
 				genres VARCHAR(128),
-				female_vocal BOOLEAN,
-				male_vocal BOOLEAN,
+				female_vocal VARCHAR(128),
+				male_vocal VARCHAR(128),
 				website VARCHAR(128),
 				instagram VARCHAR(128),
 				facebook VARCHAR(128),
-				tags TEXT,
+				tags VARCHAR(64),
 				year_of_foundation VARCHAR(64),
-				description TEXT,
-				granted BOOLEAN,
+				description VARCHAR(64),
+				granted VARCHAR(32),
 				date_created VARCHAR(128) NOT NULL,
 			    PRIMARY KEY id (id)
-			) {$charset_collate};"
+			) {$charset_collate};",
+			"CREATE TABLE {$ketchup_gang_reagistration_table} (
+				id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+				first_name VARCHAR(64),
+				last_name VARCHAR(64),
+				email VARCHAR(64),
+				phone VARCHAR(64),
+				gang_choice VARCHAR(32),
+				date_created VARCHAR(128) NOT NULL,
+			    PRIMARY KEY  id (id)
+			) {$charset_collate};",
 		];
 	}
 }

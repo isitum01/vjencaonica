@@ -2,8 +2,8 @@
 
 namespace Vjencaonica;
 
-use WpHelpers\Classes\Request_Validation_Result;
-use WpHelpers\Services\Validation_Service;
+use Ew\WpHelpers\Classes\Request_Validation_Result;
+use Ew\WpHelpers\Services\Validation_Service;
 
 /**
  * Class Music_Band_Service

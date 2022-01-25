@@ -15,7 +15,7 @@ import '../styles/main.scss';
 
 // // Import js for pages
 // import HomePage from './pages/home-page/home-page';
-import MusicBandRegistration from './pages/music-band-registration/music-band-registration';
+import KetchupGang from './pages/music-band-registration/music-band-registration';
 // import ContactPage from './pages/contact-page/contact-page';
 // import DashboardPage from './pages/dashboard/dashboard';
 
@@ -40,7 +40,7 @@ const themeRoutes = {
     },
 
     // Scripts to be initialized on the Music band registration page
-    musicBandRegistration: MusicBandRegistration
+    musicBandRegistration: KetchupGang
         
     // Scripts to be initialized on the Music band registration page (template for more scripts)
     // musicBandRegistration: {

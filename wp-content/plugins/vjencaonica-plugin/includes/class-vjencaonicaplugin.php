@@ -1,6 +1,8 @@
 <?php
 
 namespace Vjencaonica;
+use Vjencaonica\Ketchup_Gang_Registration;
+use Vjencaonica\Ketchup_Gang_Registration_Controller;
 
 /**
  * The core plugin class.
@@ -98,30 +100,40 @@ class VjencaonicaPlugin {
 		 */
 		require_once PLUGIN_DIR . '/admin/class-vjencaonicaplugin-admin.php';
 		
+		/**
+		 * Include autoload for all packages.
+		 */
+		require_once PLUGIN_DIR . '/vendor/autoload.php';
+
 		// Load post-types
 		// require_once PLUGIN_DIR . 'classes/class-product.php';
 		// require_once PLUGIN_DIR . 'classes/class-dual-campaign-registration.php';
 		require_once PLUGIN_DIR . 'post-types/class-music-band.php';
+		require_once PLUGIN_DIR . 'classes/class-ketchup-gang-registration.php';
 
 		// Load repositories
 		// require_once PLUGIN_DIR . 'repositories/class-products-repository.php';
 		// require_once PLUGIN_DIR . 'repositories/class-prize-game-registration-repository.php';
 		// require_once PLUGIN_DIR . 'repositories/class-dual-campaign-registration-repository.php';
 		// require_once PLUGIN_DIR . 'repositories/class-recipes-repository.php';
-		// require_once PLUGIN_DIR . 'repositories/class-recipes-repository.php';
+		require_once PLUGIN_DIR . 'repositories/class-music-band-repository.php';
+		require_once PLUGIN_DIR . 'repositories/class-ketchup-gang-registration-repository.php';
 
 		// Load services
 		// require_once PLUGIN_DIR . 'services/class-products-service.php';
 		// require_once PLUGIN_DIR . 'services/class-recipes-service.php';
 		// require_once PLUGIN_DIR . 'services/class-posts-service.php';
 		// require_once PLUGIN_DIR . 'services/class-prize-game-registration-service.php';
-		// require_once PLUGIN_DIR . 'services/class-dual-campaign-registration-service.php';
+		require_once PLUGIN_DIR . 'services/class-music-band-service.php';
+		require_once PLUGIN_DIR . 'services/class-ketchup-gang-registration-service.php';
 
 		// Load controllers
-		// require_once PLUGIN_DIR . 'controllers/class-afantplugin-controller.php';
+		require_once PLUGIN_DIR . 'controllers/class-avjencaonica-controller.php';
 		// require_once PLUGIN_DIR . 'controllers/class-posts-controller.php';
 		// require_once PLUGIN_DIR . 'controllers/class-prize-game-registration-controller.php';
-		// require_once PLUGIN_DIR . 'controllers/class-dual-campaign-registration-controller.php';
+		require_once PLUGIN_DIR . 'controllers/class-music-band-controller.php';
+		require_once PLUGIN_DIR . 'controllers/class-apkplugin-controller.php';
+		require_once PLUGIN_DIR . 'controllers/class-ketchup-gang-registration-controller.php';
 
 		$this->loader = new VjencaonicaPlugin_Loader();
 
@@ -152,6 +164,7 @@ class VjencaonicaPlugin {
 		// Dual_Campaign_Registration::init( $this->loader );
 		// Recipe::load_class($this->loader);
 		Music_Band::load_class($this->loader);
+		Ketchup_Gang_Registration::load_class($this->loader);
 	}
 
 	/**
@@ -164,7 +177,8 @@ class VjencaonicaPlugin {
 		$controllers = [
 			// new Posts_Controller(),
 			// new Prize_Game_Controller(),
-			// new Dual_Campaign_Controller()
+			// new Music_Band_Controller()
+			new Ketchup_Gang_Registration_Controller()
 		];
 
 		foreach ( $controllers as $controller ) {

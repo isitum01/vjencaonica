@@ -1,10 +1,10 @@
-<form class="music-band-form">
+<form class="music-band-form js-mbr-form">
     {# Basic band info #}
     <div class="music-band-form__about-band">
         {# Band name #}
         {% include "components/input.twig" with {
             label: 'Naziv benda',
-            name: 'band-name'
+            name: 'bandName'
         } %}
         {# City #}
         {% include "components/input.twig" with {
@@ -19,7 +19,7 @@
         {# Places where available #}
         {% include "components/input.twig" with {
             label: 'Dostupnost',
-            name: 'availability'
+            name: 'availableLocations'
         } %}
     </div>
 
@@ -54,7 +54,7 @@
         {# Video link (E.g. YouTube) #}
         {% include "components/input.twig" with {
             label: 'Video',
-            name: 'video-link'
+            name: 'videoLink'
         } %}
     </div>
 
@@ -73,14 +73,14 @@
         {# Female vocal #}
         {% include "components/input.twig" with {
             label: 'Ženski vokal',
-            name: 'female-vocal',
+            name: 'femaleVocal',
             type: 'checkbox',
             containerClass: 'input-flex'
         } %}
         {# Male vocal #}
         {% include "components/input.twig" with {
             label: 'Muški vokal',
-            name: 'male-vocal',
+            name: 'maleVocal',
             type: 'checkbox',
             containerClass: 'input-flex'
         } %}
@@ -97,20 +97,20 @@
         {# Year of foundation #}
         {% include "components/input.twig" with {
             label: 'Godina osnivanja',
-            name: 'year-of-foundation'
+            name: 'yearOfFoundation'
+        } %}
+        {% include "components/input.twig" with {
+            label: 'Godina osnivanja',
+            name: 'description'
         } %}
         {# Band description #}
-        {% include "components/input.twig" with {
-            label: 'Kratki opis',
-            name: 'description',
-            type: 'textarea'
-        } %}
     </div>
 
     {# Submit button #}
     {% include "components/button.twig" with {
         text: 'Pošalji prijavu',
-        link: '/',
+        type: 'submit',
+        className: 'js-mbr-submit',
         disabledClass: 'disabled'
     } %}
 

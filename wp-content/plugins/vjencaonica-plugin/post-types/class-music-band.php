@@ -9,6 +9,7 @@ namespace Vjencaonica;
 
 class Music_Band {
 	const POST_TYPE = 'music-band';
+	const SLUG = 'music-band-prijave';
 
 	public $id;
 	public $wp_post;

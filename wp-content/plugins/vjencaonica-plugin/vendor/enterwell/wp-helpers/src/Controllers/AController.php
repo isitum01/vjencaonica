@@ -1,7 +1,8 @@
 <?php
 
-namespace WpHelpers\Controllers;
-use WpHelpers\Exceptions\AException;
+//  Enterwell namespace
+namespace Ew\WpHelpers\Controllers;
+use Ew\WpHelpers\Exceptions\AEw_Exception;
 
 /**
  * Abstract class for WP REST Api controllers.
@@ -225,7 +226,7 @@ abstract class AController {
 	 */
 	protected function exception_response( \Exception $exception ) {
 
-		if ( $exception instanceof AException ) {
+		if ( $exception instanceof AEw_Exception ) {
 			return new \WP_REST_Response( $exception, $exception->get_exception_http_code() );
 		} else {
 			return new \WP_REST_Response( $exception->getMessage(), 500 );

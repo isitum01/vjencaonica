@@ -16,7 +16,7 @@ class Music_Band_Controller extends VjencaonicaPlugin_Controller {
 	 * @throws \Exception
 	 */
 	public function __construct() {
-		parent::__construct( 'vj_music-band-registration' );
+		parent::__construct( 'vj-music-band-registration' );
 		$this->music_band_service = new Music_Band_Service();
 	}
 

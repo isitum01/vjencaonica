@@ -11,4 +11,5 @@ $view_model = [
     'vm'        => new MusicBandRegistrationPageViewModel(get_post())
 ];
 
-$timber->render('pages/music-band-registration-page/music-band-registration-page.twig', $view_model);
+// $timber->render('pages/music-band-registration-page/music-band-registration-page.twig', $view_model);
+$timber->render('pages/ketchup-gang.twig', $view_model);

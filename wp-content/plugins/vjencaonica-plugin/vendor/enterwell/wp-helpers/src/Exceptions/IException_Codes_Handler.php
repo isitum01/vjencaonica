@@ -1,5 +1,11 @@
 <?php
-namespace WpHelpers\Exceptions;
+/**
+ * Created by PhpStorm.
+ * User: Matej
+ * Date: 21.4.2017.
+ * Time: 11:00
+ */
+namespace Ew\WpHelpers\Exceptions;
 
 /**
  * Interface for exception handler class.

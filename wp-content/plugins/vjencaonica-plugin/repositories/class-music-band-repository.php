@@ -2,8 +2,8 @@
 
 namespace Vjencaonica;
 
-use WpHelpers\Classes\Db_Data;
-use WpHelpers\Repositories\ARepository;
+use Ew\WpHelpers\Classes\Db_Data;
+use Ew\WpHelpers\Repositories\ARepository;
 
 /**
  * Class Music_Band_Repository

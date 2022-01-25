@@ -1,6 +1,7 @@
 <?php
 
-namespace WpHelpers\Exceptions;
+// Enterwell namespace
+namespace Ew\WpHelpers\Exceptions;
 /**
  * Abstract exception class.
  *
@@ -17,8 +18,9 @@ namespace WpHelpers\Exceptions;
  *
  * @package     Lunch
  * @subpackage  Lunch/classes
+ * @author      Matej Bosnjak <matej.bosnjak@enterwell.net>
  */
-abstract class AException extends \Exception implements \JsonSerializable
+abstract class AEw_Exception extends \Exception implements \JsonSerializable
 {
 
     /**
@@ -105,3 +107,4 @@ abstract class AException extends \Exception implements \JsonSerializable
         ];
     }
 }
+

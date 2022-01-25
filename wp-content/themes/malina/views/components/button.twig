@@ -6,7 +6,8 @@
 
 <a class="c-button {{ className|default("") }} {{ disabledClass|default("") }}"
         type="{{ type|default('button') }}"
-        href="{{ link }}">
+        {# href="{{ link|default("#") }}" #}
+        >
     {{ text }}
     {% if imgPath is not empty %}
         {# <img src="{{ image(imgPath) }}" alt="{{ imgAlt }}"/> #}
