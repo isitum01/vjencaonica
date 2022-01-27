@@ -44,7 +44,7 @@ class Music_Band_Controller extends VjencaonicaPlugin_Controller {
 	}
 
 	/**
-	 * Creates par ili ne par registration.
+	 * Creates music band registration.
 	 *
 	 * @param \WP_REST_Request $request
 	 *
@@ -52,7 +52,7 @@ class Music_Band_Controller extends VjencaonicaPlugin_Controller {
 	 */
 	public function create_music_band_registration( WP_REST_Request $request ) {
 		try {
-			// Create par ili ne par registration from params
+			// Create music band registration from params
 			$application = $this->applications_service->create( $request->get_params() );
 
 			return $this->ok( $application );

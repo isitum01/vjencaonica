@@ -20,7 +20,8 @@ Slažem se s
         {% include "components/form/input.twig" with {type: 'text',  label: 'Telefonne čislo', name: 'instruments' } %}
         {% include "components/form/input.twig" with {type: 'text',  label: 'Telefonne čislo', name: 'videoLink' } %}
         {% include "components/form/input.twig" with {type: 'text',  label: 'Telefonne čislo', name: 'genres' } %}
-        {% include "components/form/input.twig" with {type: 'text',  label: 'Telefonne čislo', name: 'femaleVocal' } %}
+        {# {% include "components/form/input.twig" with {type: 'text',  label: 'Telefonne čislo', name: 'femaleVocal' } %} #}
+        {% include "components/form/checkbox.twig" with {name: 'femaleVocal' } %}
         {% include "components/form/input.twig" with {type: 'text',  label: 'Telefonne čislo', name: 'maleVocal' } %}
         {% include "components/form/input.twig" with {type: 'text',  label: 'Telefonne čislo', name: 'website' } %}
         {% include "components/form/input.twig" with {type: 'text',  label: 'Telefonne čislo', name: 'instagram' } %}

@@ -16,7 +16,7 @@ class VjencaonicaPlugin_Activator {
 	 * Database version
 	 * Should be updated every time we modify the database
 	 */
-	const DB_VERSION = '0.0.4';
+	const DB_VERSION = '0.0.2';
 
 	/**
 	 * Database version option name
@@ -62,20 +62,9 @@ class VjencaonicaPlugin_Activator {
 		$charset_collate = $wpdb->get_charset_collate();
 
 		// Get table names.
-		$music_bands_table = "{$wp_prefix}vj_music_band_registration";
-		$ketchup_gang_reagistration_table       = "{$wp_prefix}ew_ketchup_gang_registration";
+		$music_bands_table 					= "{$wp_prefix}vj_music_bands";
 
 		return [
-			"CREATE TABLE {$ketchup_gang_reagistration_table} (
-				id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-				first_name VARCHAR(64),
-				last_name VARCHAR(64),
-				email VARCHAR(64),
-				phone VARCHAR(64),
-				gang_choice VARCHAR(32),
-				date_created VARCHAR(128) NOT NULL,
-			    PRIMARY KEY  id (id)
-			) {$charset_collate};",
 			"CREATE TABLE {$music_bands_table} (
 				id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
 				band_name VARCHAR(64),
@@ -83,19 +72,19 @@ class VjencaonicaPlugin_Activator {
 				email VARCHAR(64),
 				city VARCHAR(64),
 				country VARCHAR(64),
-				available_locations VARCHAR(64),
+				available_locations TEXT,
 				members VARCHAR(64),
-				instruments VARCHAR(64),
+				instruments TEXT,
 				video_link VARCHAR(128),
-				genres VARCHAR(128),
+				genres TEXT,
 				female_vocal VARCHAR(64),
 				male_vocal VARCHAR(64),
 				website VARCHAR(128),
 				instagram VARCHAR(128),
 				facebook VARCHAR(128),
-				tags VARCHAR(64),
+				tags TEXT,
 				year_of_foundation VARCHAR(64),
-				short_description VARCHAR(64),
+				short_description TEXT,
 				granted VARCHAR(64),
 				date_created VARCHAR(128) NOT NULL,
 			    PRIMARY KEY id (id)

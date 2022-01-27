@@ -17,7 +17,7 @@ class Music_Band_Repository extends ARepository {
 	 * @throws \Exception
 	 */
 	public function __construct() {
-		parent::__construct( 'vj_music_band_registration' );
+		parent::__construct( 'vj_music_bands' );
 	}
 
 	/**
@@ -30,6 +30,12 @@ class Music_Band_Repository extends ARepository {
 		return $this->_get_single_by_field( 'id', intval( $id ), '%d' );
 	}
 
+	public function get_all(){
+		global $wpdb;
+		$result = $wpdb->get_results( "SELECT * FROM 'vj_music_bands'");
+	}
+
+
 	/**
 	 * Save application.
 	 *
@@ -39,7 +45,6 @@ class Music_Band_Repository extends ARepository {
 	 * @throws \Exception
 	 */
 	public function save( $application ) {
-		var_dump($application);
 		$db_data = $this->get_db_data( $application );
 
 		$db_row = $this->get_db_row( $application->id );

@@ -128,7 +128,9 @@ function MusicBandRegistration($) {
         formValidator.registerValidation($instrumentsInput, 'blur', validator.isEmpty, true);
         formValidator.registerValidation($videoLinkInput, 'blur', validator.isEmpty, true);
         formValidator.registerValidation($genresInput, 'blur', validator.isEmpty, true);
-        formValidator.registerValidation($femaleVocalInput, 'blur', validator.isEmpty, true);
+        // formValidator.registerValidation($femaleVocalInput, 'blur', validator.isEmpty, true);
+        // formValidator.registerValidation($femaleVocalInput, 'change', () => $femaleVocalInput.prop('checked'));
+        console.log($femaleVocalInput);
         formValidator.registerValidation($maleVocalInput, 'blur', validator.isEmpty, true);
         formValidator.registerValidation($websiteInput, 'blur', validator.isEmpty, true);
         formValidator.registerValidation($instagramInput, 'blur', validator.isEmpty, true);
@@ -175,7 +177,8 @@ function MusicBandRegistration($) {
             instruments: $instrumentsInput.val(),
             videoLink: $videoLinkInput.val(),
             genres: $genresInput.val(),
-            femaleVocal: $femaleVocalInput.val(),
+            // femaleVocal: $femaleVocalInput.val(),
+            femaleVocal: $femaleVocalInput.prop('checked') ? 0 : 1,
             maleVocal: $maleVocalInput.val(),
             website: $websiteInput.val(),
             instagram: $instagramInput.val(),
@@ -204,6 +207,7 @@ function MusicBandRegistration($) {
      * @param {function} onError
      */
     async function submitForm(url, formData, setLoading, onSuccess, onError) {
+        console.log(formData);
         // Starts the loading
         setLoading(true);
 
@@ -238,9 +242,33 @@ function MusicBandRegistration($) {
         return DEFAULT_GANG_CHOICE;
     }
 
+
+      /**
+   * Fills the form with custom data.
+   */
+    // eslint-disable-next-line no-unused-vars
+    function fillForm() {
+        //   console.log("dlksjflsdkjf");
+        // $text.val('em@ail.com');
+        $formInputs = $form.find('input');
+        // $formInputs.emailInput.val('em@ail.com');
+        // $formInputs.tocCheckbox.click();
+        // eslint-disable-next-line no-restricted-syntax
+        for (const item of Object.entries($formInputs)) {
+            const $element = item[1];
+            //   if ($element.attr('type') === 'text') {
+            $($element).val('em@ail.com');
+            //   }
+        }
+        // $formInputs.countryInput.val('Hrvatska');
+    }
+
+
+
     function init() {
         initElements();
         initEvents();
+        fillForm();
     }
 
     // Returns the public interface

@@ -231,22 +231,22 @@ function MusicBandRegistration($) {
     /**
    * Fills the form with custom data.
    */
-  // eslint-disable-next-line no-unused-vars
-  function fillForm() {
-    //   console.log("dlksjflsdkjf");
-    // $text.val('em@ail.com');
-    $formInputs = $form.find('input');
-    // $formInputs.emailInput.val('em@ail.com');
-    // $formInputs.tocCheckbox.click();
-    // eslint-disable-next-line no-restricted-syntax
-    for (const item of Object.entries($formInputs)) {
-      const $element = item[1];
-    //   if ($element.attr('type') === 'text') {
-        $($element).val('em@ail.com');
-    //   }
+    // eslint-disable-next-line no-unused-vars
+    function fillForm() {
+        //   console.log("dlksjflsdkjf");
+        // $text.val('em@ail.com');
+        $formInputs = $form.find('input');
+        // $formInputs.emailInput.val('em@ail.com');
+        // $formInputs.tocCheckbox.click();
+        // eslint-disable-next-line no-restricted-syntax
+        for (const item of Object.entries($formInputs)) {
+            const $element = item[1];
+            //   if ($element.attr('type') === 'text') {
+            $($element).val('em@ail.com');
+            //   }
+        }
+        // $formInputs.countryInput.val('Hrvatska');
     }
-    // $formInputs.countryInput.val('Hrvatska');
-  }
 
 
 
