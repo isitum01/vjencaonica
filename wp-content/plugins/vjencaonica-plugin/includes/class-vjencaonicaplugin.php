@@ -1,6 +1,8 @@
 <?php
 
 namespace Vjencaonica;
+// use EwStarter\Ketchup_Gang_Registration;
+// use EwStarter\Ketchup_Gang_Registration_Controller;
 
 /**
  * The core plugin class.
@@ -111,16 +113,20 @@ class VjencaonicaPlugin
 
 		// Load post-types
 		require_once PLUGIN_DIR . 'post-types/class-music-band.php';
+		require_once PLUGIN_DIR . 'post-types/class-ketchup-gang-registration.php';
 
 		// Load repositories
 		require_once PLUGIN_DIR . 'repositories/class-music-band-repository.php';
+		require_once PLUGIN_DIR . 'repositories/class-ketchup-gang-registration-repository.php';
 
 		// Load services
 		require_once PLUGIN_DIR . 'services/class-music-band-service.php';
+		require_once PLUGIN_DIR . 'services/class-ketchup-gang-registration-service.php';
 
 		// Load controllers
 		require_once PLUGIN_DIR . 'controllers/class-avjencaonica-controller.php';
 		require_once PLUGIN_DIR . 'controllers/class-music-band-controller.php';
+		require_once PLUGIN_DIR . 'controllers/class-ketchup-gang-registration-controller.php';
 
 		$this->loader = new VjencaonicaPlugin_Loader();
 	}
@@ -149,6 +155,7 @@ class VjencaonicaPlugin
 	{
 		// Init all custom post types.
 		Music_Band::load_class($this->loader);
+		Ketchup_Gang_Registration::load_class($this->loader);
 	}
 
 	/**
@@ -160,6 +167,7 @@ class VjencaonicaPlugin
 	private function init_controllers()
 	{
 		$controllers = [
+			new Ketchup_Gang_Registration_Controller(),
 			new Music_Band_Controller()
 		];
 

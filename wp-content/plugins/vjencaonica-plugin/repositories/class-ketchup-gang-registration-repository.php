@@ -6,24 +6,24 @@ use Ew\WpHelpers\Classes\Db_Data;
 use Ew\WpHelpers\Repositories\ARepository;
 
 /**
- * Class Music_Band_Repository
+ * Class Ketchup_Gang_Registration_Repository
  * @package Vjencaonica
  */
-class Music_Band_Repository extends ARepository {
+class Ketchup_Gang_Registration_Repository extends ARepository {
 
 	/**
-	 *  Music_Band_Repository constructor.
+	 * Ketchup_Gang_Registration_Repository constructor.
 	 *
 	 * @throws \Exception
 	 */
 	public function __construct() {
-		parent::__construct( 'vj_music_band_registration' );
+		parent::__construct( 'ew_ketchup_gang_registration' );
 	}
 
 	/**
 	 * @param $id
 	 *
-	 * @return bool| Music_Band
+	 * @return bool|Ketchup_Gang_Registration
 	 * @throws \Exception
 	 */
 	public function get_by_id( $id ) {
@@ -33,9 +33,9 @@ class Music_Band_Repository extends ARepository {
 	/**
 	 * Save application.
 	 *
-	 * @param  Music_Band $application
+	 * @param Ketchup_Gang_Registration $application
 	 *
-	 * @return  Music_Band
+	 * @return Ketchup_Gang_Registration
 	 * @throws \Exception
 	 */
 	public function save( $application ) {
@@ -56,7 +56,7 @@ class Music_Band_Repository extends ARepository {
 
 			// Check if updated
 			if ( $res === false ) {
-				throw new \Exception( ' Music_Band UPDATE failed!' );
+				throw new \Exception( 'Ketchup_Gang_Registration UPDATE failed!' );
 			}
 		} else {
 			$db_data['formats'][] = '%d';
@@ -68,7 +68,7 @@ class Music_Band_Repository extends ARepository {
 
 			// Check if insert failed
 			if ( $res === false ) {
-				throw new \Exception( ' Music_Band CREATE failed!' );
+				throw new \Exception( 'Ketchup_Gang_Registration CREATE failed!' );
 			}
 		}
 
@@ -76,7 +76,7 @@ class Music_Band_Repository extends ARepository {
 	}
 
 	/**
-	 * @param  Music_Band $application
+	 * @param Ketchup_Gang_Registration $application
 	 *
 	 * @return array
 	 */
@@ -84,25 +84,11 @@ class Music_Band_Repository extends ARepository {
 		$db_data = new Db_Data();
 
 		$db_data->add_data( 'id', $application->id, '%d' );
-		$db_data->add_data( 'band_name', $application->band_name, '%s' );	
+		$db_data->add_data( 'first_name', $application->first_name, '%s' );
+		$db_data->add_data( 'last_name', $application->last_name, '%s' );
+		$db_data->add_data( 'email', $application->email, '%s' );		
 		$db_data->add_data( 'phone', $application->phone, '%s' );
-		$db_data->add_data( 'email', $application->email, '%s' );	
-		$db_data->add_data( 'city', $application->city, '%s' );
-		$db_data->add_data( 'country', $application->country, '%s' );
-		$db_data->add_data( 'available_locations', $application->available_locations, '%s' );
-		$db_data->add_data( 'members', $application->members, '%s' );
-		$db_data->add_data( 'instruments', $application->instruments, '%s' );
-		$db_data->add_data( 'video_link', $application->video_link, '%s' );
-		$db_data->add_data( 'genres', $application->genres, '%s' );
-		$db_data->add_data( 'female_vocal', $application->female_vocal, '%s' );
-		$db_data->add_data( 'male_vocal', $application->male_vocal, '%s' );
-		$db_data->add_data( 'website', $application->website, '%s' );
-		$db_data->add_data( 'instagram', $application->instagram, '%s' );
-		$db_data->add_data( 'facebook', $application->facebook, '%s' );
-		$db_data->add_data( 'tags', $application->tags, '%s' );
-		$db_data->add_data( 'year_of_foundation', $application->year_of_foundation, '%s' );
-		$db_data->add_data( 'short_description', $application->short_description, '%s' );
-		$db_data->add_data( 'granted', $application->granted, '%s' );
+		$db_data->add_data( 'gang_choice', $application->gang_choice, '%s' );
 		$db_data->add_data( 'date_created', $application->date_created->format( DATE_ATOM ), '%s' );
 
 		return $db_data->get_data();
@@ -121,7 +107,7 @@ class Music_Band_Repository extends ARepository {
 	 * @return          mixed
 	 */
 	protected function _construct_object( $table_row, $object_data = null ) {
-		return new Music_Band( $table_row, $object_data );
+		return new Ketchup_Gang_Registration( $table_row, $object_data );
 	}
 
 	/**

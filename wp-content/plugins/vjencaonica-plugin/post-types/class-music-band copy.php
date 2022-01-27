@@ -34,7 +34,6 @@ class Music_Band
 	public $granted;
 	public $date_created;
 
-
 	/**
 	 * Music_Band constructor.
 	 *
@@ -73,7 +72,6 @@ class Music_Band
 		$this->short_description 	= $row['short_description'];
 		$this->granted 				= $row['granted'];
 		$this->date_created			= \DateTime::createFromFormat(DATE_ATOM, $row['date_created']);
-		
 	}
 
 	/**
