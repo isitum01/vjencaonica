@@ -139,7 +139,7 @@ function MusicBandRegistration($) {
         formValidator.registerValidation($yearOfFoundationInput, 'blur', validator.isEmpty, true);
         formValidator.registerValidation($shortDescriptionInput, 'blur', validator.isEmpty, true);
         formValidator.registerValidation($grantedInput, 'blur', validator.isEmpty, true);
-        formValidator.registerValidation($tocCheckbox, 'change', () => $tocCheckbox.prop('checked'));
+        // formValidator.registerValidation($tocCheckbox, 'change', () => $tocCheckbox.prop('checked'));
 
         // Prepares the inputs
         const inputs = {
@@ -162,7 +162,7 @@ function MusicBandRegistration($) {
             yearOfFoundationInput: $yearOfFoundationInput,
             shortDescriptionInput: $shortDescriptionInput,
             grantedInput: $grantedInput,
-            tocCheckbox: $tocCheckbox,
+            // tocCheckbox: $tocCheckbox,
         };
 
         // Registers the data getter
