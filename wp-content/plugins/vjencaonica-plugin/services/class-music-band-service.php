@@ -80,17 +80,36 @@ class Music_Band_Service extends Validation_Service {
 	 * @throws \Exception
 	 */
 	public function create( array $r ) {
+
+		$slug		= Random_Values_Helper::get_random_string(8);
+		$full_name	= "{$r['bandName']}";
+
+		// Create wp post
+		$post_id = wp_insert_post([
+			'post_title'	=> $full_name,
+			'post_status'	=> 'publish',
+			'post_type'		=> Music_Band::POST_TYPE,
+			'post_name'		=> $slug,
+			'post_excerpt'	=> $r['shortDescription']
+		]);
+
+		if( empty($post_id)){
+			throw new \Exception('Post could not be created');
+		}
+
+		$post = get_post( $post_id );
+
 		// Validate request
-		$validation_result = $this->validate_create( $r );
+		// $validation_result = $this->validate_create( $r );
 
 		// If the result is not valid throw request validation exception
-		if ( ! $validation_result->is_valid() ) {
-			throw new Validation_Exception( $validation_result->get_message() );
-		}
+		// if ( ! $validation_result->is_valid() ) {
+		// 	throw new Validation_Exception( $validation_result->get_message() );
+		// }
 
 		try {
 			// Save prize game registration to the db
-			$application						= new Music_Band();
+			$application						= new Music_Band([], $post);
 			$application->band_name				= sanitize_text_field( $r['bandName'] );
 			$application->phone					= sanitize_text_field( $r['phone'] );
 			$application->email					= sanitize_text_field( $r['email'] );

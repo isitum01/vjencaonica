@@ -11,8 +11,10 @@ class Music_Band
 	const POST_TYPE = 'music-band';
 	const SLUG = 'music-band-prijave';
 
+	public static $FIELD_INSTRUMENTS = 'instruments';
+
 	public $id;
-	// public $wp_post;
+	public $wp_post;
 	public $band_name;
 	public $phone;
 	public $email;
@@ -39,19 +41,22 @@ class Music_Band
 	 * Music_Band constructor.
 	 *
 	 * @param array $row
-	 * @param null $wp_post
+	 * @param null|\WP_Post $wp_post
 	 */
-	public function __construct($row = [], $post = null)
+	public function __construct($row = [], $wp_post = null)
 	{
 		// Init current date as date created
-		$this->date_created = new \DateTime();
+		// $this->date_created = new \DateTime();
+
+		$this->wp_post = $wp_post;
+		$this->id = !empty($wp_post) ? $this->wp_post->ID : 0;
 
 		// We construct empty object
 		if (empty($row)) {
 			return;
 		}
 
-		$this->id 					= intval($row['id']);
+		// $this->id 					= intval($row['id']);
 		// public $wp_post;
 		$this->band_name 			= $row['band_name'];
 		$this->phone 				= $row['phone'];
@@ -73,7 +78,6 @@ class Music_Band
 		$this->short_description 	= $row['short_description'];
 		$this->granted 				= $row['granted'];
 		$this->date_created			= \DateTime::createFromFormat(DATE_ATOM, $row['date_created']);
-		
 	}
 
 	/**
@@ -83,6 +87,9 @@ class Music_Band
 	 */
 	public static function load_class($loader)
 	{
+		// Create custom fields
+		$loader->add_action('acf/register_fields', static::class, 'music_band_add_local_field_groups');
+
 		// Initializes new post type
 		$loader->add_action('init', static::class, 'init_post_type');
 	}
@@ -112,7 +119,7 @@ class Music_Band
 		$args = [
 			'labels'             => $labels,
 			'description'        => __('Description.', PLUGIN_TEXTDOMAIN),
-			'public'             => false,
+			'public'             => true,
 			'publicly_queryable' => true,
 			'show_ui'            => true,
 			'show_in_menu'       => true,
@@ -122,12 +129,78 @@ class Music_Band
 			'has_archive'        => false,
 			'hierarchical'       => false,
 			'menu_position'      => null,
-			'supports'           => ['title', 'editor'],
+			'supports'           => ['title', 'editor', 'excerpt'],
 			'menu_icon'          => 'dashicons-id-alt',
 			'show_in_rest'       => false
 		];
 
 		// Register post type
 		register_post_type(static::POST_TYPE, $args);
+	}
+
+	public static function music_band_add_local_field_groups()
+	{
+		acf_add_local_field_group([
+			'key'		=> 'group_music_band',
+			'title'		=> 'Music band',
+			'fields'	=> [
+				[
+					'key'				=> self::$FIELD_INSTRUMENTS,
+					'label'				=> 'Instrumenti',
+					'name'				=> self::$FIELD_INSTRUMENTS,
+					'type'				=> 'text',
+					'instructions'		=> '',
+					'required'			=> 0,
+					'conditional_logic'	=> 0,
+					'wrapper'           => [
+						'width' => '',
+						'class' => '',
+						'id'    => '',
+					],
+					'message'           => '',
+					'default_value'     => 0,
+					'ui'                => 1,
+					'ui_on_text'        => '',
+					'ui_off_text'       => '',
+				]
+			],
+			'location'	=> [
+				[
+					[
+						'param' => 'post_type',
+						'operator' => '==',
+						'value' => 'post',
+					]
+				]
+			],
+			'menu_order'			=> 0,
+			'position'				=> 'side',
+			'style'					=> 'default',
+			'label_placement'		=> 'top',
+			'instruction_placement'	=> 'label'
+		]);
+
+
+		// acf_add_local_field_group(array(
+		// 	'key' => 'group_1',
+		// 	'title' => 'My Group',
+		// 	'fields' => array (
+		// 		array (
+		// 			'key' => 'field_1',
+		// 			'label' => 'Sub Title',
+		// 			'name' => 'sub_title',
+		// 			'type' => 'text',
+		// 		)
+		// 	),
+		// 	'location' => array (
+		// 		array (
+		// 			array (
+		// 				'param' => 'post_type',
+		// 				'operator' => '==',
+		// 				'value' => 'post',
+		// 			),
+		// 		),
+		// 	),
+		// ));
 	}
 }

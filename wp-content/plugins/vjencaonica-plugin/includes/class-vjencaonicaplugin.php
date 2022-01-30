@@ -111,6 +111,9 @@ class VjencaonicaPlugin
 		// Load exceptions
 		require_once PLUGIN_DIR . 'exceptions/class-validation-exception.php';
 
+		// Load helpers
+		require_once PLUGIN_DIR . 'helpers/class-random-values-helper.php';
+
 		// Load post-types
 		require_once PLUGIN_DIR . 'post-types/class-music-band.php';
 

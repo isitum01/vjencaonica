@@ -37,8 +37,9 @@ class Music_Band_Controller extends VjencaonicaPlugin_Controller {
 			$this->get_namespace(),
 			"/" . $this->route,
 			[
-				'methods'  => WP_REST_Server::CREATABLE,
-				'callback' => [ $this, 'create_music_band_registration' ]
+				'methods'  => 'POST',
+				'callback' => [ $this, 'create_music_band_registration' ],
+				'permission_callback' => '__return_true'
 			]
 		);
 	}
@@ -51,11 +52,25 @@ class Music_Band_Controller extends VjencaonicaPlugin_Controller {
 	 * @return \WP_REST_Response
 	 */
 	public function create_music_band_registration( WP_REST_Request $request ) {
+
+		$r =  $request->get_params();
+
+		$result = $this->applications_service->validate_create( $r );
+		if( ! $result->is_valid()){
+			return $this->bad_request( $result->get_message());
+		}
+
 		try {
 			// Create music band registration from params
 			$application = $this->applications_service->create( $request->get_params() );
 
-			return $this->ok( $application );
+			// return $this->ok( $application );
+
+			return $this->ok([
+				'application'	=> $application,
+				'permalink'		=> get_permalink($application->wp_post)
+			]);
+
 		} catch ( Validation_Exception $e ) {
 			return $this->bad_request( $e->getMessage() );
 		} catch ( \Exception $e ) {
