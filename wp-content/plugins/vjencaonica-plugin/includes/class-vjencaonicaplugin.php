@@ -116,12 +116,19 @@ class VjencaonicaPlugin
 
 		// Load post-types
 		require_once PLUGIN_DIR . 'post-types/class-music-band.php';
+		require_once PLUGIN_DIR . 'post-types/class-recipe.php';
+
+		// Load classes
+		require_once PLUGIN_DIR . 'classes/dtos/class-recipe-dto.php';
+		require_once PLUGIN_DIR . 'classes/dtos/class-music-band-dto.php';
 
 		// Load repositories
 		require_once PLUGIN_DIR . 'repositories/class-music-band-repository.php';
+		require_once PLUGIN_DIR . 'repositories/class-recipes-repository.php';
 
 		// Load services
 		require_once PLUGIN_DIR . 'services/class-music-band-service.php';
+		require_once PLUGIN_DIR . 'services/class-recipes-service.php';
 
 		// Load controllers
 		require_once PLUGIN_DIR . 'controllers/class-avjencaonica-controller.php';
@@ -154,6 +161,7 @@ class VjencaonicaPlugin
 	{
 		// Init all custom post types.
 		Music_Band::load_class($this->loader);
+		Recipe::load_class( $this->loader );
 	}
 
 	/**

@@ -1,0 +1,18 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <main>
+        <div class="c-container">
+            <div class="single-page__container">
+                <header class="single-page__header">
+                    <h1>{{ vm.postTitle }}</h1>
+                </header>
+                <div class="single-page__content">
+                    {{ vm.postContent | raw }}
+                </div>
+
+                {{ vm.fpRecipes | raw }}
+            </div>
+        </div>
+    </main>
+{% endblock %}

@@ -81,15 +81,14 @@ class Music_Band_Service extends Validation_Service {
 	 */
 	public function create( array $r ) {
 
-		$slug		= Random_Values_Helper::get_random_string(8);
 		$full_name	= "{$r['bandName']}";
 
 		// Create wp post
 		$post_id = wp_insert_post([
 			'post_title'	=> $full_name,
 			'post_status'	=> 'publish',
-			'post_type'		=> Music_Band::POST_TYPE,
-			'post_name'		=> $slug,
+			'post_type'		=> Music_Band::$POST_TYPE,
+			'post_name'		=> $full_name,
 			'post_excerpt'	=> $r['shortDescription']
 		]);
 

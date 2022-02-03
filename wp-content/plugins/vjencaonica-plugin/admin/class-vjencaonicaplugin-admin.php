@@ -53,6 +53,8 @@ class VjencaonicaPlugin_Admin
 	 */
 	public function enqueue_styles()
 	{
+		    wp_register_style('vjencaonica_admin_style', PLUGIN_URL . 'admin/assets/styles/admin.css');
+			wp_enqueue_style('vjencaonica_admin_style');
 	}
 
 	/**

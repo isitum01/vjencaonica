@@ -3,11 +3,10 @@
 namespace Vjencaonica;
 
 use WP_REST_Request;
-use WP_REST_Server;
 
 /**
  * Class Music_Band_Controller
- * @package EwStarter
+ * @package Vjencaonica
  */
 class Music_Band_Controller extends VjencaonicaPlugin_Controller {
 
