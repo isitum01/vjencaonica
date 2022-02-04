@@ -167,8 +167,8 @@ function MusicBandRegistration($) {
             instruments: $instrumentsInput.val(),
             videoLink: $videoLinkInput.val(),
             genres: $genresInput.val(),
-            femaleVocal: $femaleVocalInput.prop('checked') ? 0 : 1,
-            maleVocal: $maleVocalInput.prop('checked') ? 0 : 1,
+            femaleVocal: $femaleVocalInput.prop('checked') ? 1 : 0,
+            maleVocal: $maleVocalInput.prop('checked') ? 1 : 0,
             website: $websiteInput.val(),
             instagram: $instagramInput.val(),
             facebook: $facebookInput.val(),
@@ -234,7 +234,6 @@ function MusicBandRegistration($) {
     function init() {
         initElements();
         initEvents();
-        initCheckbox($checkboxInput);
         fillForm();
     }
 
