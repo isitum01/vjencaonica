@@ -2,130 +2,121 @@
 
 namespace Vjencaonica;
 
-use WpHelpers\Classes\Db_Data;
-use WpHelpers\Repositories\ARepository;
+use Ew\WpHelpers\Classes\Db_Data;
+use Ew\WpHelpers\Repositories\ARepository;
 
 /**
  * Class Music_Band_Repository
  * @package Vjencaonica
  */
-class Music_Band_Repository extends ARepository {
+class Music_Band_Repository extends ARepository
+{
 
 	/**
-	 * Music_Band_Repository constructor.
-	 *
-	 * @param string $table_name
+	 *  Music_Band_Repository constructor.
 	 *
 	 * @throws \Exception
 	 */
-	public function __construct( $table_name = 'music-bands' ) {
-		parent::__construct( $table_name );
+	public function __construct()
+	{
+		parent::__construct('vj_music_bands');
 	}
 
 	/**
 	 * @param $id
 	 *
-	 * @return bool|Music_Band
+	 * @return bool| Music_Band
 	 * @throws \Exception
 	 */
-	public function get_by_id( $id ) {
-		$post = get_post( $id );
-		if ( empty( $post ) ) {
-			return false;
-		}
-
-		return $this->get_by_wp_post( $post );
+	public function get_by_id($id)
+	{
+		return $this->_get_single_by_field('id', intval($id), '%d');
 	}
 
-	/**
-	 * Gets single by wp post.
-	 *
-	 * @param $post
-	 *
-	 * @return bool|Music_Band
-	 * @throws \Exception
-	 */
-	public function get_by_wp_post( $post ) {
-		if ( ! in_array( $post->post_type, [
-			Music_Band::POST_TYPE
-		] ) ) {
-			throw new \Exception( 'post_type is not music-band!' );
-		}
-
-		return $this->_get_single_by_field( 'id', $post->ID, '%d', $post );
+	public function get_all()
+	{
+		global $wpdb;
+		$result = $wpdb->get_results("SELECT * FROM 'vj_music_bands'");
 	}
 
+
 	/**
-	 * Save music band.
+	 * Save application and update post.
 	 *
-	 * @param Music_Band $music_band
+	 * @param  Music_Band $application
 	 *
-	 * @return Music_Band
+	 * @return  Music_Band
 	 * @throws \Exception
 	 */
-	public function save( $music_band ) {
-		$db_data = $this->get_db_data( $music_band );
+	public function save($application, $post)
+	{
+		$db_data = $this->get_db_data($application);
 
-		if ( empty( $music_band->id ) ) {
-			throw new \Exception( 'music_band id is empty!' );
-		}
+		$db_row = $this->get_db_row($application->id);
 
-		if ( $this->exists( $music_band->id ) ) {
-			// Remove id from values and formats
-			array_shift( $db_data['values'] );
-			array_shift( $db_data['formats'] );
+		if (!empty($db_row)) {
+			// Update in the db
 			$res = $this->db->update(
 				$this->table_name,
 				$db_data['values'],
-				[ 'id' => $music_band->id ],
+				['id' => $application->id],
 				$db_data['formats'],
-				[ '%d' ]
+				'%d'
 			);
+
+			// Check if updated
+			if ($res === false) {
+				throw new \Exception(' Music_Band UPDATE failed!');
+			}
 		} else {
+			$db_data['formats'][] = '%d';
+			// Insert into db
 			$res = $this->db->insert(
 				$this->table_name,
-				$db_data['values'],
-				$db_data['formats']
+				$db_data['values']
 			);
+
+			// Check if insert failed
+			if ($res === false) {
+				throw new \Exception(' Music_Band CREATE failed!');
+			}
 		}
 
-		if ( $res === false ) {
-			throw new \Exception( 'Save failed!' );
-		}
+		$wp_post = $this->update_wp_post($application, $post);
 
-		return $music_band;
+		return $application;
 	}
 
 	/**
-	 * @param Music_Band $music_band
+	 * @param  Music_Band $application
 	 *
 	 * @return array
 	 */
-	private function get_db_data( $music_band ) {
+	private function get_db_data($application)
+	{
 		$db_data = new Db_Data();
-		$mb_granted = empty($music_band->granted) ? false : $music_band->granted;
 
-		$db_data->add_data( 'id', $music_band->id, '%d' );
-		$db_data->add_data( 'band_name', $music_band->band_name, '%s' );
-		$db_data->add_data( 'phone', $music_band->phone, '%s' );
-		$db_data->add_data( 'email', $music_band->email, '%s' );
-		$db_data->add_data( 'city', $music_band->city, '%s' );
-		$db_data->add_data( 'country', $music_band->country, '%s' );
-		$db_data->add_data( 'available_locations', $music_band->available_locations, '%s' );
-		$db_data->add_data( 'members', $music_band->members, '%s' );
-		$db_data->add_data( 'instruments', $music_band->instruments, '%s' );
-		$db_data->add_data( 'video_link', $music_band->video_link, '%s' );
-		$db_data->add_data( 'genres', $music_band->genres, '%s' );
-		$db_data->add_data( 'female_vocal', $music_band->female_vocal, '%s' );
-		$db_data->add_data( 'male_vocal', $music_band->male_vocal, '%s' );
-		$db_data->add_data( 'website', $music_band->website, '%s' );
-		$db_data->add_data( 'instagram', $music_band->instagram, '%s' );
-		$db_data->add_data( 'facebook', $music_band->facebook, '%s' );
-		$db_data->add_data( 'tags', $music_band->tags, '%s' );
-		$db_data->add_data( 'year_of_foundation', $music_band->year_of_foundation, '%s' );
-		$db_data->add_data( 'description', $music_band->description, '%s' );
-		$db_data->add_data( 'granted', $mb_granted, '%s' );
-		$db_data->add_data( 'date_created', $music_band->date_created, '%s' );
+		$db_data->add_data('id', $application->id, '%d');
+		$db_data->add_data('band_name', $application->band_name, '%s');
+		$db_data->add_data('phone', $application->phone, '%s');
+		$db_data->add_data('email', $application->email, '%s');
+		$db_data->add_data('city', $application->city, '%s');
+		$db_data->add_data('country', $application->country, '%s');
+		$db_data->add_data('available_locations', $application->available_locations, '%s');
+		$db_data->add_data('members', $application->members, '%s');
+		$db_data->add_data('instruments', $application->instruments, '%s');
+		$db_data->add_data('video_link', $application->video_link, '%s');
+		$db_data->add_data('genres', $application->genres, '%s');
+		$db_data->add_data('female_vocal', $application->female_vocal, '%s');
+		$db_data->add_data('male_vocal', $application->male_vocal, '%s');
+		$db_data->add_data('website', $application->website, '%s');
+		$db_data->add_data('instagram', $application->instagram, '%s');
+		$db_data->add_data('facebook', $application->facebook, '%s');
+		$db_data->add_data('tags', $application->tags, '%s');
+		$db_data->add_data('year_of_foundation', $application->year_of_foundation, '%s');
+		$db_data->add_data('short_description', $application->short_description, '%s');
+		$db_data->add_data('granted', $application->granted, '%s');
+		$db_data->add_data('date_created', $application->date_created->format(DATE_ATOM), '%s');
 
 		return $db_data->get_data();
 	}
@@ -142,21 +133,44 @@ class Music_Band_Repository extends ARepository {
 	 *
 	 * @return          mixed
 	 */
-	protected function _construct_object( $table_row, $object_data = null ) {
-		return new Music_Band( $table_row, $object_data );
+	protected function _construct_object($table_row, $object_data = null)
+	{
+		return new Music_Band($table_row, $object_data);
 	}
 
 	/**
-	 * Checks if type exists.
+	 * @param int $id
 	 *
-	 * @param $id
-	 *
-	 * @return bool
+	 * @return array|null|object
 	 */
-	private function exists( $id ) {
-		$query = $this->db->prepare( "SELECT * FROM {$this->table_name} WHERE id = %d", intval( $id ) );
-		$result = $this->db->get_row( $query, ARRAY_A );
+	private function get_db_row($id)
+	{
+		$query = $this->db->prepare("SELECT * FROM {$this->table_name} WHERE id = %d", intval($id));
 
-		return ! empty( $result );
+		return $this->db->get_row($query, ARRAY_A);
+	}
+
+	/**
+	 * 
+	 */
+	private function update_wp_post($application, $post)
+	{
+		update_field(Music_Band::$PHONE, $application->phone, $post->ID);
+		update_field(Music_Band::$EMAIL, $application->email, $post->ID);
+		update_field(Music_Band::$CITY, $application->city, $post->ID);
+		update_field(Music_Band::$COUNTRY, $application->country, $post->ID);
+		update_field(Music_Band::$AVAILABLE_LOCATIONS, $application->available_locations, $post->ID);
+		update_field(Music_Band::$MEMBERS, $application->members, $post->ID);
+		update_field(Music_Band::$INSTRUMENTS, $application->instruments, $post->ID);
+		update_field(Music_Band::$VIDEO_LINK, $application->video_link, $post->ID);
+		update_field(Music_Band::$GENRES, $application->genres, $post->ID);
+		update_field(Music_Band::$FEMALE_VOCAL, $application->female_vocal, $post->ID);
+		update_field(Music_Band::$MALE_VOCAL, $application->male_vocal, $post->ID);
+		update_field(Music_Band::$WEBSITE, $application->website, $post->ID);
+		update_field(Music_Band::$INSTAGRAM, $application->instagram, $post->ID);
+		update_field(Music_Band::$FACEBOOK, $application->facebook, $post->ID);
+		update_field(Music_Band::$TAGS, $application->tags, $post->ID);
+		update_field(Music_Band::$YEAR_OF_FOUNDATION, $application->year_of_foundation, $post->ID);
+		
 	}
 }

@@ -1,0 +1,46 @@
+{
+    "packages": [
+        {
+            "name": "enterwell/wp-helpers",
+            "version": "1.0.0",
+            "version_normalized": "1.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Enterwell/wp-helpers.git",
+                "reference": "814b3d9de965022a88e21cb8e1360ae5b9d52a92"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Enterwell/wp-helpers/zipball/814b3d9de965022a88e21cb8e1360ae5b9d52a92",
+                "reference": "814b3d9de965022a88e21cb8e1360ae5b9d52a92",
+                "shasum": ""
+            },
+            "time": "2018-09-04T06:19:09+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Ew\\WpHelpers\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matej Bošnjak",
+                    "email": "matej.bosnjak.b@gmail.com"
+                }
+            ],
+            "description": "Helper classes for WordPress custom development.",
+            "support": {
+                "issues": "https://github.com/Enterwell/wp-helpers/issues",
+                "source": "https://github.com/Enterwell/wp-helpers/tree/master"
+            },
+            "install-path": "../enterwell/wp-helpers"
+        }
+    ],
+    "dev": true,
+    "dev-package-names": []
+}

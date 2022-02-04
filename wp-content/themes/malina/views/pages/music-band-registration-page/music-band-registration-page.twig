@@ -1,9 +1,46 @@
 {% extends 'base.twig' %}
 
-{% block content %}
-    <main>
-        {{ vm.content | raw}}
+{% set chechboxMessage %}
+	Slažem se s	<a href="/" target="_blank">pravilima i uvjetima.</a>
+{% endset %}
 
-        <h2>mb page init</h2>
-    </main>
+{% block content %}
+	{# Music band section #}
+	<section class="music-band">
+		<div class="c-container">
+			<form class="js-mb-form">
+				<div class="form-row">
+					{% include "components/form/input.twig" with { type: 'text', label: 'bandName', name: 'bandName' } %}
+					{% include "components/form/input.twig" with {type: 'text',  label: 'phone', name: 'phone' } %}
+					{% include "components/form/input.twig" with {type: 'email', label: 'email', name: 'email' } %}
+					{% include "components/form/input.twig" with {type: 'text',  label: 'city', name: 'city' } %}
+					{% include "components/form/input.twig" with {type: 'text',  label: 'country', name: 'country' } %}
+				</div>
+				<div class="form-row">
+					{% include "components/form/input.twig" with {type: 'text',  label: 'availableLocations', name: 'availableLocations' } %}
+					{% include "components/form/input.twig" with {type: 'text',  label: 'members', name: 'members' } %}
+					{% include "components/form/input.twig" with {type: 'text',  label: 'instruments', name: 'instruments' } %}
+					{% include "components/form/input.twig" with {type: 'text',  label: 'videoLink', name: 'videoLink' } %}
+					{% include "components/form/input.twig" with {type: 'text',  label: 'genres', name: 'genres' } %}
+					{% include "components/form/checkbox.twig" with {label: 'femaleVocal', name: 'femaleVocal', message: ' '} %}
+					{% include "components/form/checkbox.twig" with {label: 'maleVocal', name: 'maleVocal', message: ' ' } %}
+				</div>
+				<div class="form-row">
+					{% include "components/form/input.twig" with {type: 'text',  label: 'website', name: 'website' } %}
+					{% include "components/form/input.twig" with {type: 'text',  label: 'instagram', name: 'instagram' } %}
+					{% include "components/form/input.twig" with {type: 'text',  label: 'facebook', name: 'facebook' } %}
+					{% include "components/form/input.twig" with {type: 'text',  label: 'tags', name: 'tags' } %}
+					{% include "components/form/input.twig" with {type: 'text',  label: 'yearOfFoundation', name: 'yearOfFoundation' } %}
+					{% include "components/form/input.twig" with {type: 'text',  label: 'shortDescription', name: 'shortDescription' } %}
+				</div>
+
+				{% include "components/form/checkbox.twig" with {
+          			name: 'acceptTerms',
+          			error: 'Prihvaćanje pravila i uvjeta je obavezno.',
+          			message: chechboxMessage
+        		} %}
+			</form>
+			<button class="js-mb-submit">Pošalji prijavu</button>
+		</div>
+	</section>
 {% endblock %}

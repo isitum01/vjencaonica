@@ -1,0 +1,18 @@
+.music-band{
+
+    form{
+        display: flex;
+
+        .form-row{
+            margin-right: 100px;
+        }
+    }
+
+    .c-input{
+        max-width: 200px;
+
+        > span{
+            display: none;
+        }
+    }
+}

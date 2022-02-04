@@ -1,0 +1,24 @@
+//
+// This file contains all common variables used in whole project.
+//
+
+// Page container
+$max-width-page-container: 1278px; // max page width - min navbar width
+$padding-page-container: 56px;
+$padding-page-container-mobile: 16px;
+
+// Breakpoints
+$breakpoint-smaller-screen: 1024px;
+$breakpoint-tablet: 768px;
+$breakpoint-small-tablet: 700px;
+$breakpoint-mobile: 500px;
+
+// Navbars
+$height-navbar: 60px;
+$height-wp-admin-bar: 32px;
+$width-navbar-tucked: 88px;
+$width-navbar-expanded: 224px;
+$height-navbar-mobile: 64px;
+
+// Z-index
+$z-index-cookie: 999;
