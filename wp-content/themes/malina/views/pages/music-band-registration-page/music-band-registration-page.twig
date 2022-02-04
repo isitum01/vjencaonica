@@ -1,15 +1,14 @@
 {% extends 'base.twig' %}
 
 {% set chechboxMessage %}
-Slažem se s
-<a href="/" target="_blank">pravilima i uvjetima nagradnog natječaja.</a>
+	Slažem se s	<a href="/" target="_blank">pravilima i uvjetima.</a>
 {% endset %}
 
 {% block content %}
 	{# Music band section #}
 	<section class="music-band">
 		<div class="c-container">
-			<form class="js-kg-form">
+			<form class="js-mb-form">
 				<div class="form-row">
 					{% include "components/form/input.twig" with { type: 'text', label: 'bandName', name: 'bandName' } %}
 					{% include "components/form/input.twig" with {type: 'text',  label: 'phone', name: 'phone' } %}
@@ -23,9 +22,8 @@ Slažem se s
 					{% include "components/form/input.twig" with {type: 'text',  label: 'instruments', name: 'instruments' } %}
 					{% include "components/form/input.twig" with {type: 'text',  label: 'videoLink', name: 'videoLink' } %}
 					{% include "components/form/input.twig" with {type: 'text',  label: 'genres', name: 'genres' } %}
-					{# {% include "components/form/input.twig" with {type: 'text',  label: 'čislo', }'femaleVocal' } %} #}
-					{% include "components/form/checkbox.twig" with {label: 'femaleVocal', name: 'femaleVocal' } %}
-					{% include "components/form/input.twig" with {type: 'text',  label: 'maleVocal', name: 'maleVocal' } %}
+					{% include "components/form/checkbox.twig" with {label: 'femaleVocal', name: 'femaleVocal', message: ' '} %}
+					{% include "components/form/checkbox.twig" with {label: 'maleVocal', name: 'maleVocal', message: ' ' } %}
 				</div>
 				<div class="form-row">
 					{% include "components/form/input.twig" with {type: 'text',  label: 'website', name: 'website' } %}
@@ -34,17 +32,15 @@ Slažem se s
 					{% include "components/form/input.twig" with {type: 'text',  label: 'tags', name: 'tags' } %}
 					{% include "components/form/input.twig" with {type: 'text',  label: 'yearOfFoundation', name: 'yearOfFoundation' } %}
 					{% include "components/form/input.twig" with {type: 'text',  label: 'shortDescription', name: 'shortDescription' } %}
-					{% include "components/form/input.twig" with {type: 'text',  label: 'granted', name: 'granted' } %}
 				</div>
 
 				{% include "components/form/checkbox.twig" with {
-          name: 'acceptTerms',
-          error: 'Prihvaćanje pravila i uvjeta je obavezno.',
-          message: chechboxMessage
-        } %}
-
+          			name: 'acceptTerms',
+          			error: 'Prihvaćanje pravila i uvjeta je obavezno.',
+          			message: chechboxMessage
+        		} %}
 			</form>
-			<button class="js-kg-submit">Pošalji prijavu</button>
+			<button class="js-mb-submit">Pošalji prijavu</button>
 		</div>
 	</section>
 {% endblock %}

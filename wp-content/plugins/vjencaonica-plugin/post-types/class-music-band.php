@@ -66,8 +66,8 @@ class Music_Band
 		// Init current date as date created
 		// $this->date_created = new \DateTime();
 
-		// $this->wp_post = $wp_post;
-		// $this->id = !empty($wp_post) ? $this->wp_post->ID : 0;
+		$this->wp_post = $wp_post;
+		$this->id = !empty($wp_post) ? $this->wp_post->ID : 0;
 
 		// We construct empty object
 		// if (empty($row)) {
@@ -75,13 +75,13 @@ class Music_Band
 		// }
 
 		if (empty($wp_post)) {
-			throw new \Exception('No post in product constructor');
+			throw new \Exception('No post in music band constructor');
 		}
 
-		$this->id           	= $wp_post->ID;
-		$this->title       		= $wp_post->post_title;
-		$this->content     	 	= $wp_post->post_content;
-		$this->excerpt      	= $wp_post->post_excerpt;
+		$this->id           		= $wp_post->ID;
+		$this->title       			= $wp_post->post_title;
+		$this->content     	 		= $wp_post->post_content;
+		$this->short_description    = $wp_post->post_excerpt;
 		$this->phone				= get_field( self::$PHONE, $wp_post->ID );
 		$this->email				= get_field( self::$EMAIL, $wp_post->ID );
 		$this->city					= get_field( self::$CITY, $wp_post->ID );
@@ -99,29 +99,6 @@ class Music_Band
 		$this->tags	    			= get_field( self::$TAGS, $wp_post->ID );
 		$this->yearOfFoundation	   	= get_field( self::$YEAR_OF_FOUNDATION, $wp_post->ID );
 		$this->granted	    		= get_field( self::$GRANTED, $wp_post->ID );
-
-		// $this->id 					= intval($row['id']);
-		// public $wp_post;
-		// $this->band_name 			= $row['band_name'];
-		// $this->phone 				= $row['phone'];
-		// $this->email 				= $row['email'];
-		// $this->city 				= $row['city'];
-		// $this->country 				= $row['country'];
-		// $this->available_locations 	= $row['available_locations'];
-		// $this->members 				= $row['members'];
-		// $this->instruments 			= $row['instruments'];
-		// $this->video_link			= $row['video_link'];
-		// $this->genres 				= $row['genres'];
-		// $this->female_vocal			= $row['female_vocal'];
-		// $this->male_vocal 			= $row['male_vocal'];
-		// $this->website 				= $row['website'];
-		// $this->instagram 			= $row['instagram'];
-		// $this->facebook 			= $row['facebook'];
-		// $this->tags 				= $row['tags'];
-		// $this->year_of_foundation	= $row['year_of_foundation'];
-		// $this->short_description 	= $row['short_description'];
-		// $this->granted 				= $row['granted'];
-		// $this->date_created			= \DateTime::createFromFormat(DATE_ATOM, $row['date_created']);
 	}
 
 	/**

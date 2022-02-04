@@ -120,7 +120,7 @@ class VjencaonicaPlugin
 
 		// Load classes
 		require_once PLUGIN_DIR . 'classes/dtos/class-recipe-dto.php';
-		require_once PLUGIN_DIR . 'classes/dtos/class-music-band-dto.php';
+		// require_once PLUGIN_DIR . 'classes/dtos/class-music-band-dto.php';
 
 		// Load repositories
 		require_once PLUGIN_DIR . 'repositories/class-music-band-repository.php';

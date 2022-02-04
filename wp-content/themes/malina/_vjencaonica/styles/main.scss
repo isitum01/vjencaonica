@@ -1,1 +1,24 @@
+// Import all variables for all styles
+@import "common/variables";
+
+// Import all colors for all styles
+@import "common/colors";
+
+// Import core styles
+@import "common/core";
+
+// Import core styles
+@import "common/mixins";
+
+// Import buttons styles
+@import "components/buttons";
+
+// Import checkbox styles
+@import "components/form/checkbox";
+
+// Import input styles
+@import "components/form/input";
+
+
+
 @import "pages/music-band-registration/music-band-registration";

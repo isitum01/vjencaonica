@@ -2,7 +2,6 @@
 import validator from 'validator';
 import FormValidatorFactory from '../../helpers/form-validator';
 import ApiService from '../../services/ApiService';
-import 'url-search-params-polyfill';
 
 /**
  * MusicBandRegistration section
@@ -12,14 +11,13 @@ import 'url-search-params-polyfill';
  */
 function MusicBandRegistration($) {
     // Constants
-    const URL_PARAMETER = 'gang';
-    const DEFAULT_GANG_CHOICE = 'unknown';
     const CLASS_HIDDEN = 'hidden';
 
     // Elements
     let $form;
     let $formInputs;
     let $submitBtn;
+    let $checkboxInput;
 
     // Vars
     let kgFormValidator;
@@ -29,8 +27,9 @@ function MusicBandRegistration($) {
      * Elements initialization
      */
     function initElements() {
-        $form = $('.js-kg-form');
-        $submitBtn = $('.js-kg-submit');
+        $form = $('.js-mb-form');
+        $submitBtn = $('.js-mb-submit');
+        $checkboxInput = $form.find('input[type="checkbox"]');
     }
 
     /**
@@ -44,15 +43,13 @@ function MusicBandRegistration($) {
      * Handles form submit
      */
     function handleFormSubmit() {
-        console.log("radi");
-
         // Register form
-        const ketchupGangForm = registerStandardForm($form);
+        const musicBandForm = registerStandardForm($form);
 
         // Sets the form data
-        $formInputs = ketchupGangForm.inputs;
-        kgFormValidator = ketchupGangForm.formValidator;
-        getFormDataFn = ketchupGangForm.getFormData;
+        $formInputs = musicBandForm.inputs;
+        kgFormValidator = musicBandForm.formValidator;
+        getFormDataFn = musicBandForm.getFormData;
 
         // Validate form data
         kgFormValidator.validateAll();
@@ -65,18 +62,16 @@ function MusicBandRegistration($) {
         // Retrieves the data
         const formData = getFormDataFn();
 
-        // Add gang choice to form data
-        // formData.gangChoice = getChoiceFromUrl(URL_PARAMETER);
-
         // Set url
         const url = 'vj_music_band_registration';
 
         // Process functions
         function setLoading() {
-            // console.log('loading');
+            console.log('loading');
         }
         function onSuccess() {
             $form.addClass(CLASS_HIDDEN);
+            console.log('success');
         }
         function onError() {
             console.log('error');
@@ -112,7 +107,6 @@ function MusicBandRegistration($) {
         const $tagsInput = $form.find('input[name="tags"]');
         const $yearOfFoundationInput = $form.find('input[name="yearOfFoundation"]');
         const $shortDescriptionInput = $form.find('input[name="shortDescription"]');
-        const $grantedInput = $form.find('input[name="granted"]');
         const $tocCheckbox = $form.find('input[name="acceptTerms"]');
 
 
@@ -128,18 +122,15 @@ function MusicBandRegistration($) {
         formValidator.registerValidation($instrumentsInput, 'blur', validator.isEmpty, true);
         formValidator.registerValidation($videoLinkInput, 'blur', validator.isEmpty, true);
         formValidator.registerValidation($genresInput, 'blur', validator.isEmpty, true);
-        // formValidator.registerValidation($femaleVocalInput, 'blur', validator.isEmpty, true);
         // formValidator.registerValidation($femaleVocalInput, 'change', () => $femaleVocalInput.prop('checked'));
-        console.log($femaleVocalInput);
-        formValidator.registerValidation($maleVocalInput, 'blur', validator.isEmpty, true);
+        // formValidator.registerValidation($maleVocalInput, 'change', () => $maleVocalInput.prop('checked'));
         formValidator.registerValidation($websiteInput, 'blur', validator.isEmpty, true);
         formValidator.registerValidation($instagramInput, 'blur', validator.isEmpty, true);
         formValidator.registerValidation($facebookInput, 'blur', validator.isEmpty, true);
         formValidator.registerValidation($tagsInput, 'blur', validator.isEmpty, true);
         formValidator.registerValidation($yearOfFoundationInput, 'blur', validator.isEmpty, true);
         formValidator.registerValidation($shortDescriptionInput, 'blur', validator.isEmpty, true);
-        formValidator.registerValidation($grantedInput, 'blur', validator.isEmpty, true);
-        // formValidator.registerValidation($tocCheckbox, 'change', () => $tocCheckbox.prop('checked'));
+        formValidator.registerValidation($tocCheckbox, 'change', () => $tocCheckbox.prop('checked'));
 
         // Prepares the inputs
         const inputs = {
@@ -161,8 +152,7 @@ function MusicBandRegistration($) {
             tagsInput: $tagsInput,
             yearOfFoundationInput: $yearOfFoundationInput,
             shortDescriptionInput: $shortDescriptionInput,
-            grantedInput: $grantedInput,
-            // tocCheckbox: $tocCheckbox,
+            tocCheckbox: $tocCheckbox,
         };
 
         // Registers the data getter
@@ -177,16 +167,14 @@ function MusicBandRegistration($) {
             instruments: $instrumentsInput.val(),
             videoLink: $videoLinkInput.val(),
             genres: $genresInput.val(),
-            // femaleVocal: $femaleVocalInput.val(),
             femaleVocal: $femaleVocalInput.prop('checked') ? 0 : 1,
-            maleVocal: $maleVocalInput.val(),
+            maleVocal: $maleVocalInput.prop('checked') ? 0 : 1,
             website: $websiteInput.val(),
             instagram: $instagramInput.val(),
             facebook: $facebookInput.val(),
             tags: $tagsInput.val(),
             yearOfFoundation: $yearOfFoundationInput.val(),
-            shortDescription: $shortDescriptionInput.val(),
-            granted: $grantedInput.val()
+            shortDescription: $shortDescriptionInput.val()
         });
 
         // Returns the data
@@ -207,7 +195,6 @@ function MusicBandRegistration($) {
      * @param {function} onError
      */
     async function submitForm(url, formData, setLoading, onSuccess, onError) {
-        console.log(formData);
         // Starts the loading
         setLoading(true);
 
@@ -230,44 +217,24 @@ function MusicBandRegistration($) {
         return result;
     }
 
+
     /**
-     * Gets url parametar, if none returns custom default value
+     * Fills the form with custom data.
      */
-    function getChoiceFromUrl(parameter) {
-        const url = new URLSearchParams(window.location.search);
 
-        if (url.get(parameter)) {
-            return url.get(parameter);
-        }
-        return DEFAULT_GANG_CHOICE;
-    }
-
-
-      /**
-   * Fills the form with custom data.
-   */
     // eslint-disable-next-line no-unused-vars
     function fillForm() {
-        //   console.log("dlksjflsdkjf");
-        // $text.val('em@ail.com');
         $formInputs = $form.find('input');
-        // $formInputs.emailInput.val('em@ail.com');
-        // $formInputs.tocCheckbox.click();
-        // eslint-disable-next-line no-restricted-syntax
         for (const item of Object.entries($formInputs)) {
             const $element = item[1];
-            //   if ($element.attr('type') === 'text') {
             $($element).val('em@ail.com');
-            //   }
         }
-        // $formInputs.countryInput.val('Hrvatska');
     }
-
-
 
     function init() {
         initElements();
         initEvents();
+        initCheckbox($checkboxInput);
         fillForm();
     }
 

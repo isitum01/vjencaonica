@@ -1,0 +1,33 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+	<main>
+		<div class="c-container">
+			<div class="music-band__container">
+				<header class="music-band__header">
+					<h1>{{ vm.postTitle }}</h1>
+				</header>
+				<div class="music-band__content">
+					{{ vm.shortDescription | raw }}
+					{{ vm.phone | raw }}
+					{{ vm.email | raw }}
+					{{ vm.city | raw }}
+					{{ vm.country | raw }}
+					{{ vm.availableLocations | raw }}
+					{{ vm.members | raw }}
+					{{ vm.instruments | raw }}
+					{{ vm.videoLink | raw }}
+					{{ vm.genres | raw }}
+					{{ vm.femaleVocal | raw }}
+					{{ vm.maleVocal | raw }}
+					{{ vm.website | raw }}
+					{{ vm.instagram | raw }}
+					{{ vm.facebook | raw }}
+					{{ vm.tags | raw }}
+					{{ vm.yearOfFoundation | raw }}
+					{{ vm.granted | raw }}
+				</div>
+			</div>
+		</div>
+	</main>
+{% endblock %}

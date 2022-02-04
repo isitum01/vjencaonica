@@ -127,11 +127,10 @@ class Music_Band_Service extends Validation_Service {
 			$application->tags					= sanitize_text_field( $r['tags'] );
 			$application->year_of_foundation	= sanitize_text_field( $r['yearOfFoundation'] );
 			$application->short_description		= sanitize_text_field( $r['shortDescription'] );
-			$application->granted				= sanitize_text_field( $r['granted'] );
 			$application->date_created			= new \DateTime();
 
 			// Return saved user registration
-			return $this->applications_repository->save( $application );
+			return $this->applications_repository->save( $application, $post );
 		} catch ( \Exception $e ) {
 			throw $e;
 		}

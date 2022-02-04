@@ -8,13 +8,13 @@
 		/> #}
 	</span>
 	<p class="c-checkbox__wrapper__content">
-		{{ message|default('Prihvaćam pravila nagradnog natječaja.') }}
+		{{ message|default('Prihvaćam pravila i uvjete.') }}
 	</p>
 </div>
 {% endset %}
 
 {% include 'components/form/input.twig' with {
-	label: label|default('Prihvaćanje pravila nagradnog natječaja'),
+	label: label|default('Prihvaćanje pravila i uvjeta'),
 	type: 'checkbox',
 	containerClass: 'c-checkbox',
 	extraHtml: extraHtml
