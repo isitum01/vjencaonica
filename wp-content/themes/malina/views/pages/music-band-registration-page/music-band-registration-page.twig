@@ -9,36 +9,50 @@
 	<section class="music-band">
 		<div class="c-container">
 			<form class="js-mb-form">
+				<h5>Osnovne informacije o bendu</h5>
 				<div class="form-row">
-					{% include "components/form/input.twig" with { type: 'text', label: 'bandName', name: 'bandName' } %}
-					{% include "components/form/input.twig" with {type: 'text',  label: 'phone', name: 'phone' } %}
-					{% include "components/form/input.twig" with {type: 'email', label: 'email', name: 'email' } %}
-					{% include "components/form/input.twig" with {type: 'text',  label: 'city', name: 'city' } %}
-					{% include "components/form/input.twig" with {type: 'text',  label: 'country', name: 'country' } %}
+					{% include "components/form/input.twig" with { type: 'text', label: 'Naziv benda', name: 'bandName' } %}
+					{% include "components/form/input.twig" with {type: 'text',  label: 'Broj telefona', name: 'phone' } %}
+					{% include "components/form/input.twig" with {type: 'email', label: 'Email adresa', name: 'email' } %}
 				</div>
 				<div class="form-row">
-					{% include "components/form/input.twig" with {type: 'text',  label: 'availableLocations', name: 'availableLocations' } %}
-					{% include "components/form/input.twig" with {type: 'text',  label: 'members', name: 'members' } %}
-					{% include "components/form/input.twig" with {type: 'text',  label: 'instruments', name: 'instruments' } %}
-					{% include "components/form/input.twig" with {type: 'text',  label: 'videoLink', name: 'videoLink' } %}
-					{% include "components/form/input.twig" with {type: 'text',  label: 'genres', name: 'genres' } %}
-					{% include "components/form/checkbox.twig" with {label: 'femaleVocal', name: 'femaleVocal', message: ' '} %}
-					{% include "components/form/checkbox.twig" with {label: 'maleVocal', name: 'maleVocal', message: ' ' } %}
+					{% include "components/form/input.twig" with {type: 'text',  label: 'Godina osnivanja', name: 'yearOfFoundation' } %}
+					{% include "components/form/input.twig" with {type: 'text',  label: 'Broj članova benda', name: 'members' } %}
+					{% include "components/form/input.twig" with {type: 'text',  label: 'Video link', name: 'videoLink' } %}
+				</div>
+				<h5>Lokacija benda</h5>
+				<div class="form-row">
+				
+					{% include "components/form/input.twig" with {type: 'text',  label: 'Grad', name: 'city' } %}
+					{% include "components/form/input.twig" with {type: 'text',  label: 'Država', name: 'country' } %}
+					{% include "components/form/input.twig" with {type: 'text',  label: 'Dostupne lokacije', name: 'availableLocations' } %}
+				</div>
+				<h5>Glazbene specifičnosti benda</h5>
+				<div class="form-row">
+					{% include "components/form/input.twig" with {type: 'text',  label: 'Instrumenti', name: 'instruments' } %}
+					{% include "components/form/input.twig" with {type: 'text',  label: 'Glazbeni žanrovi', name: 'genres' } %}
+					{% include "components/form/checkbox.twig" with {label: 'Ženski vokal', name: 'femaleVocal', message: ' '} %}
+					{% include "components/form/checkbox.twig" with {label: 'Muški vokal', name: 'maleVocal', message: ' ' } %}
+					
+				</div>
+				<h5>Društvene mreže</h5>
+				<div class="form-row">
+				{% include "components/form/input.twig" with {type: 'text',  label: 'Web stranica', name: 'website' } %}
+					{% include "components/form/input.twig" with {type: 'text',  label: 'Instagram profil', name: 'instagram' } %}
+					{% include "components/form/input.twig" with {type: 'text',  label: 'Facebook profil', name: 'facebook' } %}
+				</div>
+				<h5>Ostale informacije</h5>
+				<div class="form-row">
+					{% include "components/form/input.twig" with {type: 'text',  label: 'Tagovi', name: 'tags' } %}
+					{% include "components/form/input.twig" with {type: 'text',  label: 'Kratki opis', name: 'shortDescription' } %}
 				</div>
 				<div class="form-row">
-					{% include "components/form/input.twig" with {type: 'text',  label: 'website', name: 'website' } %}
-					{% include "components/form/input.twig" with {type: 'text',  label: 'instagram', name: 'instagram' } %}
-					{% include "components/form/input.twig" with {type: 'text',  label: 'facebook', name: 'facebook' } %}
-					{% include "components/form/input.twig" with {type: 'text',  label: 'tags', name: 'tags' } %}
-					{% include "components/form/input.twig" with {type: 'text',  label: 'yearOfFoundation', name: 'yearOfFoundation' } %}
-					{% include "components/form/input.twig" with {type: 'text',  label: 'shortDescription', name: 'shortDescription' } %}
+					{% include "components/form/checkbox.twig" with {
+						name: 'acceptTerms',
+						error: 'Prihvaćanje pravila i uvjeta je obavezno.',
+						message: chechboxMessage
+					} %}
 				</div>
-
-				{% include "components/form/checkbox.twig" with {
-          			name: 'acceptTerms',
-          			error: 'Prihvaćanje pravila i uvjeta je obavezno.',
-          			message: chechboxMessage
-        		} %}
 			</form>
 			<button class="js-mb-submit">Pošalji prijavu</button>
 		</div>

@@ -1,14 +1,16 @@
 // File for defining common input styles
-
 .c-input {
-    &__container {
-    }
-
+    &__container {}
     &.error {
-        .c-input {
-            &-container {
-                &__error {
-                    display: block;
+        & {
+            .c-input {
+                &-container {
+                    &__error {
+                        color: #dc3232;
+                        font-size: 12px;
+                        font-weight: 400;
+                        display: block !important;
+                    }
                 }
             }
         }

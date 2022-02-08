@@ -69,10 +69,12 @@ function MusicBandRegistration($) {
         function setLoading() {
             console.log('loading');
         }
+
         function onSuccess() {
             $form.addClass(CLASS_HIDDEN);
             console.log('success');
         }
+
         function onError() {
             console.log('error');
         }
@@ -86,7 +88,7 @@ function MusicBandRegistration($) {
      * Registers the standard form
      * @param {jQuery.element} $form
      * @returns {{inputs: object, formValidator: object, getFormData: function}}
-    */
+     */
     function registerStandardForm($form) {
         // Retrieves the elements        
         const $bandNameInput = $form.find('input[name="bandName"]');
@@ -234,7 +236,7 @@ function MusicBandRegistration($) {
     function init() {
         initElements();
         initEvents();
-        fillForm();
+        // fillForm();
     }
 
     // Returns the public interface
