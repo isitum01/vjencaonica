@@ -1,0 +1,23 @@
+// File for defining common button styles
+
+.c-button {
+  position: relative;
+  color: $color-white;
+  border-radius: 2px;
+  outline: none;
+  padding: 1.6rem 3.2rem;
+  overflow: hidden;
+  min-width: 126px;
+  min-height: 48px;
+
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.6rem;
+  line-height: 1.6rem;
+  letter-spacing: .6px;
+  text-decoration: none;
+
+  &--disabled {
+    pointer-events: none;
+  }
+}

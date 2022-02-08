@@ -1,16 +1,14 @@
-// const ewThemeConfig = require('../theme-config');
-
 const path = require('path');
 
 const PATHS = {
   root: path.join(__dirname, '../'),
-  assets: path.join(__dirname, '../assets'),
-  styles: path.join(__dirname, '../assets/styles'),
-  fonts: path.join(__dirname, '../assets/styles/fonts'),
-//   fonts: path.join(__dirname, '../assets/fonts'),
-  scripts: path.join(__dirname, '../assets/js'),
-  build: path.join(__dirname, '../assets/dist'),
-  gutenberg: path.join(__dirname, '../assets/gutenberg')
+  assets: path.join(__dirname, '../_vjencaonica'),
+  styles: path.join(__dirname, '../_vjencaonica/styles'),
+  fonts: path.join(__dirname, '../_vjencaonica/styles/fonts'),
+//   fonts: path.join(__dirname, '../_vjencaonica/fonts'),
+  scripts: path.join(__dirname, '../_vjencaonica/js'),
+  build: path.join(__dirname, '../_vjencaonica/dist'),
+  gutenberg: path.join(__dirname, '../_vjencaonica/gutenberg')
 };
 
 module.exports = {

@@ -1,0 +1,8 @@
+.acf-fields{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.acf-fields > .acf-field{
+    width: 30%;
+}

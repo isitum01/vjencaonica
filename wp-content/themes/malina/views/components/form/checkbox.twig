@@ -1,0 +1,21 @@
+{% set extraHtml %}
+<div class="c-checkbox__wrapper js-checkbox-wrapper">
+	<span class="c-checkbox__wrapper__img-container">
+		{# <img
+			src="{{ image('nn-par-ili-ne-par/icon-check.svg') }}"
+			alt="checkbox označen"
+			class="c-checkbox__wrapper__img js-checkbox-img"
+		/> #}
+	</span>
+	<p class="c-checkbox__wrapper__content">
+		{{ message|default('Prihvaćam pravila i uvjete.') }}
+	</p>
+</div>
+{% endset %}
+
+{% include 'components/form/input.twig' with {
+	label: label|default('Prihvaćanje pravila i uvjeta'),
+	type: 'checkbox',
+	containerClass: 'c-checkbox',
+	extraHtml: extraHtml
+} %}

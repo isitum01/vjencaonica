@@ -1,0 +1,25 @@
+//
+// File for definition of all core common contents such as
+// default project font (for html element), some body styles
+// etc.
+//
+@import "variables";
+
+html {
+  //margin-top: $height-navbar;
+  font-weight: normal;
+  scroll-behavior: smooth;
+
+  &.admin-logged-in {
+    //margin-top: $height-navbar + $height-wp-admin-bar !important;
+    margin-top: $height-wp-admin-bar !important;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+body {
+  font-size: 1.6rem;
+}

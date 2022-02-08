@@ -1,6 +1,8 @@
 <?php
 
 namespace Vjencaonica;
+// use EwStarter\Ketchup_Gang_Registration;
+// use EwStarter\Ketchup_Gang_Registration_Controller;
 
 /**
  * The core plugin class.
@@ -15,7 +17,8 @@ namespace Vjencaonica;
  * @package    VjencaonicaPlugin
  * @subpackage VjencaonicaPlugin/includes
  */
-class VjencaonicaPlugin {
+class VjencaonicaPlugin
+{
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -54,7 +57,8 @@ class VjencaonicaPlugin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function __construct() {
+	public function __construct()
+	{
 
 		$this->plugin_name = 'vjencaonica-plugin';
 		$this->version     = '1.0.0';
@@ -81,50 +85,56 @@ class VjencaonicaPlugin {
 	 *
 	 * @since    1.0.0
 	 */
-	private function load_dependencies() {
+	private function load_dependencies()
+	{
 		/**
 		 * Include constants required for plugin to work.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . '/constants.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . '/constants.php';
 
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
 		require_once PLUGIN_DIR . '/includes/class-vjencaonicaplugin-loader.php';
-        
+
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once PLUGIN_DIR . '/admin/class-vjencaonicaplugin-admin.php';
-		
+
+		/**
+		 * Include autoload for all packages.
+		 */
+		require_once PLUGIN_DIR . '/vendor/autoload.php';
+
+		// Load exceptions
+		require_once PLUGIN_DIR . 'exceptions/class-validation-exception.php';
+
+		// Load helpers
+		require_once PLUGIN_DIR . 'helpers/class-random-values-helper.php';
+
 		// Load post-types
-		// require_once PLUGIN_DIR . 'classes/class-product.php';
-		// require_once PLUGIN_DIR . 'classes/class-dual-campaign-registration.php';
 		require_once PLUGIN_DIR . 'post-types/class-music-band.php';
+		require_once PLUGIN_DIR . 'post-types/class-recipe.php';
+
+		// Load classes
+		require_once PLUGIN_DIR . 'classes/dtos/class-recipe-dto.php';
+		// require_once PLUGIN_DIR . 'classes/dtos/class-music-band-dto.php';
 
 		// Load repositories
-		// require_once PLUGIN_DIR . 'repositories/class-products-repository.php';
-		// require_once PLUGIN_DIR . 'repositories/class-prize-game-registration-repository.php';
-		// require_once PLUGIN_DIR . 'repositories/class-dual-campaign-registration-repository.php';
-		// require_once PLUGIN_DIR . 'repositories/class-recipes-repository.php';
-		// require_once PLUGIN_DIR . 'repositories/class-recipes-repository.php';
+		require_once PLUGIN_DIR . 'repositories/class-music-band-repository.php';
+		require_once PLUGIN_DIR . 'repositories/class-recipes-repository.php';
 
 		// Load services
-		// require_once PLUGIN_DIR . 'services/class-products-service.php';
-		// require_once PLUGIN_DIR . 'services/class-recipes-service.php';
-		// require_once PLUGIN_DIR . 'services/class-posts-service.php';
-		// require_once PLUGIN_DIR . 'services/class-prize-game-registration-service.php';
-		// require_once PLUGIN_DIR . 'services/class-dual-campaign-registration-service.php';
+		require_once PLUGIN_DIR . 'services/class-music-band-service.php';
+		require_once PLUGIN_DIR . 'services/class-recipes-service.php';
 
 		// Load controllers
-		// require_once PLUGIN_DIR . 'controllers/class-afantplugin-controller.php';
-		// require_once PLUGIN_DIR . 'controllers/class-posts-controller.php';
-		// require_once PLUGIN_DIR . 'controllers/class-prize-game-registration-controller.php';
-		// require_once PLUGIN_DIR . 'controllers/class-dual-campaign-registration-controller.php';
+		require_once PLUGIN_DIR . 'controllers/class-avjencaonica-controller.php';
+		require_once PLUGIN_DIR . 'controllers/class-music-band-controller.php';
 
 		$this->loader = new VjencaonicaPlugin_Loader();
-
 	}
 
 	/**
@@ -133,11 +143,12 @@ class VjencaonicaPlugin {
 	 *
 	 * @since    1.0.0
 	 */
-	private function define_admin_hooks() {
-		$plugin_admin = new VjencaonicaPlugin_Admin( $this->get_plugin_name(), $this->get_version() );
+	private function define_admin_hooks()
+	{
+		$plugin_admin = new VjencaonicaPlugin_Admin($this->get_plugin_name(), $this->get_version());
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
+		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
 		// $this->loader->add_action( 'admin_menu', $plugin_admin, 'add_pages' );
 	}
 
@@ -146,12 +157,11 @@ class VjencaonicaPlugin {
 	 *
 	 * @since 1.0.0
 	 */
-	private function initialize_post_types() {
+	private function initialize_post_types()
+	{
 		// Init all custom post types.
-		// Product::load_class( $this->loader );
-		// Dual_Campaign_Registration::init( $this->loader );
-		// Recipe::load_class($this->loader);
 		Music_Band::load_class($this->loader);
+		Recipe::load_class( $this->loader );
 	}
 
 	/**
@@ -160,15 +170,14 @@ class VjencaonicaPlugin {
 	 * @since 1.0.0
 	 * @throws \Exception
 	 */
-	private function init_controllers() {
+	private function init_controllers()
+	{
 		$controllers = [
-			// new Posts_Controller(),
-			// new Prize_Game_Controller(),
-			// new Dual_Campaign_Controller()
+			new Music_Band_Controller()
 		];
 
-		foreach ( $controllers as $controller ) {
-			$this->loader->add_action( 'rest_api_init', $controller, 'register_routes' );
+		foreach ($controllers as $controller) {
+			$this->loader->add_action('rest_api_init', $controller, 'register_routes');
 		}
 	}
 
@@ -177,7 +186,8 @@ class VjencaonicaPlugin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function run() {
+	public function run()
+	{
 		$this->loader->run();
 	}
 
@@ -188,7 +198,8 @@ class VjencaonicaPlugin {
 	 * @since     1.0.0
 	 * @return    string    The name of the plugin.
 	 */
-	public function get_plugin_name(): string {
+	public function get_plugin_name(): string
+	{
 		return $this->plugin_name;
 	}
 
@@ -198,7 +209,8 @@ class VjencaonicaPlugin {
 	 * @since     1.0.0
 	 * @return    VjencaonicaPlugin_Loader    Orchestrates the hooks of the plugin.
 	 */
-	public function get_loader(): VjencaonicaPlugin_Loader {
+	public function get_loader(): VjencaonicaPlugin_Loader
+	{
 		return $this->loader;
 	}
 
@@ -208,8 +220,8 @@ class VjencaonicaPlugin {
 	 * @since     1.0.0
 	 * @return    string    The version number of the plugin.
 	 */
-	public function get_version(): string {
+	public function get_version(): string
+	{
 		return $this->version;
 	}
-
 }

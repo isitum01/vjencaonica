@@ -2164,7 +2164,7 @@ add_action('wp_footer', 'malina_schemaorg_print_scripts');
     // $version    = VJENCAONICA_DEV_MODE ? time() : false;
     $version    = time();
 
-	wp_register_script('vjencaonica_script', $theme_uri . '/assets/dist/bundle.min.js', [], $version, true);
+	wp_register_script('vjencaonica_script', $theme_uri . '/_vjencaonica/dist/bundle.min.js', [], $version, true);
 	wp_enqueue_script('vjencaonica_script');
 
 
